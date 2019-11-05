@@ -1,0 +1,16 @@
+#MyEclipse Hibernate Properties
+#Tue Nov 05 11:07:56 CST 2019
+genVersionTag=false
+genAnnotations=false
+configFile=/ColdChainTransportation/src/hibernate.cfg.xml
+reStrategyClass=
+sessionFactoryId=
+profile=
+detectM2M=false
+genBasicCompId=false
+keyGenerator=
+createConfigFile=true
+basePersistenceClass=
+detectO2O=false
+useJavaTypes=true
+reSettingsFile=
