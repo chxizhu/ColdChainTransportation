@@ -20,36 +20,7 @@
 		<property name="myeclipse.connection.profile">
 			NursingClinicalManageDB
 		</property>
-		<mapping resource="model/TAnswer.hbm.xml" />
-		<mapping resource="model/TAnswerkey.hbm.xml" />
-		<mapping resource="model/TChiefComplaint.hbm.xml" />
-		<mapping resource="model/TEasyExamine.hbm.xml" />
-		<mapping resource="model/TExamTime.hbm.xml" />
-		<mapping resource="model/TLife.hbm.xml" />
-		<mapping resource="model/TNowSick.hbm.xml" />
-		<mapping resource="model/TOtherExamine.hbm.xml" />
-		<mapping resource="model/TPastSick.hbm.xml" />
-		<mapping resource="model/TPatient.hbm.xml" />
-		<mapping resource="model/TPhoto.hbm.xml" />
-		<mapping resource="model/TQuestionKey.hbm.xml" />
-		<mapping resource="model/TQuestionType.hbm.xml" />
-		<mapping resource="model/TScore.hbm.xml" />
-		<mapping resource="model/TScoreScale.hbm.xml" />
-		<mapping resource="model/TStuClass.hbm.xml" />
-		<mapping resource="model/TUnit.hbm.xml" />
-		<mapping resource="model/TUser.hbm.xml" />
-		<mapping resource="model/TUserType.hbm.xml" />
-		<mapping resource="model/VAdmin.hbm.xml" />
-		<mapping resource="model/VAdminUser.hbm.xml" />
-		<mapping resource="model/VPatientUnit.hbm.xml" />
-		<mapping resource="model/VPastSickpatient.hbm.xml" />
-		<mapping resource="model/VLifePatient.hbm.xml" />
-		<mapping resource="model/VPatient.hbm.xml" />
-		<mapping resource="model/VPatientChief.hbm.xml" />
-		<mapping resource="model/VPatientNowSick.hbm.xml" />
-		<mapping resource="model/VStudent.hbm.xml" />
-		<mapping resource="model/VUserInfoAndroid.hbm.xml" />
-		<mapping resource="model/VStuScoreAndroid.hbm.xml" />
+		
 
 	</session-factory>
 
