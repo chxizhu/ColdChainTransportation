@@ -105,62 +105,61 @@
           </div>
         </div>
     </div>
-	<script type="text/javascript" src="layui/layui.all.js"></script>
-	<script type="text/javascript" src="js/loadselect.js"></script>
-	<script type="text/javascript" src="js/jquery-3.3.1.js"></script>
+	<script type="text/javascript" src="../layui/layui.all.js"></script>
+	<script type="text/javascript" src="../js/jquery-3.3.1.js"></script>
 	<script>
-		$(document).ready(function(){
-		  $("#btnLogin").click(function(){
-		    var stuId=$("#stuId").val().trim();
-		    var stuPwd=$("#stuPwd").val().trim();
-		    //alert(stuId+stuPwd);
-		    if(stuId==null||stuId==""){
-		    	layer.alert('账号不能为空', {
-		    		title:"提示",
-				  //icon: 1,
-				  //skin: 'layer-ext-moon' //该皮肤由layer.seaning.com友情扩展。关于皮肤的扩展规则，去这里查阅
-				})
-		    }
-		    else if(stuPwd==null||stuPwd==""){
-		    	layer.alert('账号不能为空', {
-		    		title:"提示",
-				  //icon: 1,
-				  //skin: 'layer-ext-moon' //该皮肤由layer.seaning.com友情扩展。关于皮肤的扩展规则，去这里查阅
-				})
-		    }
-		    else{
-		    	$.ajax({
-		    		type: 'get',
-					url: "user/tealogin",
-					dataType: 'json',
-					data:{
-						teaId:stuId,
-						teaPwd:stuPwd
-					},
-					success:function(data){
-						if(data.code == 0){
-							//layer.confirm(data.msg, {
-								//icon: 1,
-								//btn: ['确定']
-							//},function(){
-								window.location.href='index.html';
-							//});
-						}else{
-							layer.confirm(data.msg, {
-								icon: 6,
-								btn: ['确定']
-							});
+				layui.use(['form','layer'], function(){
+					var layer = layui.layer
+					var form = layui.form;	  
+					var $ = layui.jquery;					
+					/* 点击登录 */
+					$("#btnLogin").click(function(){
+						var username=$("#stuId").val().trim();
+						var password=$("#stuPwd").val().trim();
+				
+					 	if(username==null || username=="" || username==undefined){
+							$("#user_name").focus();
+							return;
 						}
-					},error:function(){
-						layer.confirm('出现错误，删除失败，请重试！', {
-						icon: 6,
-						btn: ['确定']
-						});
-					},
-		    	})
-		    }
-		  });
-		});
-	</script>
+						if(password==null || password=="" || password==undefined){
+							$("#user_password").focus();
+							return;
+						}
+						if(password.length<6 || password.length>18){
+							layer.alert('密码长度不符合规范!', {icon: 2});
+							return;
+						} 						
+						/*
+						var enpwd = hex_md5(fix(Encryption_key,password));
+						$("#inppassword").val(enpwd);
+						*/
+						 var index = layer.load(0, {shade: 0.1});
+						$.ajax({
+		 					 url : '../Admin/AdminLogin?userid='+username+'&userpwd='+password, 
+							datatype : 'json',
+							success : function(data) {
+								if (data.code == 0) {
+								/* $(function(){
+									    $.ajax({url:"controller/selecFY",
+									    success:function(result){
+									        
+									    }});
+									}); */
+									window.location.href = "index.jsp";
+									
+								} else {
+									layer.alert(data.msg, {icon: 2});
+									layer.close(index);
+									$("input").val("");
+								}
+							},
+							error:function(e){
+			    	        	 layer.alert(e.msg); 	
+								/*  layer.alert('登录失败!', {icon: 2});		 */					 
+			    	        }
+						}); 						
+					});					
+				});
+			</script>
 </body>
 </html>

@@ -1,16 +1,20 @@
 #MyEclipse Hibernate Properties
-#Tue Nov 05 11:07:56 CST 2019
-genVersionTag=false
-genAnnotations=false
-configFile=/ColdChainTransportation/src/hibernate.cfg.xml
-reStrategyClass=
-sessionFactoryId=
-profile=
-detectM2M=false
+#Wed Nov 06 16:19:30 CST 2019
 genBasicCompId=false
-keyGenerator=
-createConfigFile=true
-basePersistenceClass=
+sessionFactoryName=
+profile=
+daoSFId=
+jndiPath=
+detectM2M=false
+reStrategyClass=
 detectO2O=false
+springDaoFile=
 useJavaTypes=true
-reSettingsFile=
+keyGenerator=
+genVersionTag=false
+sessionFactoryId=
+basePersistenceClass=
+genAnnotations=false
+reSettingsFile=/ColdChainTransportation/hibernate.reveng.xml
+configFile=/ColdChainTransportation/src/hibernate.cfg.xml
+createConfigFile=true

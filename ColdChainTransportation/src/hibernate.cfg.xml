@@ -10,7 +10,7 @@
 			org.hibernate.dialect.SybaseAnywhereDialect
 		</property>
 		<property name="connection.url">
-			jdbc:sqlserver://localhost:1433;DatabaseName=NursingClinicalManageDB
+			jdbc:sqlserver://localhost:5652;DatabaseName=ColdChainTransportationDB
 		</property>
 		<property name="connection.username">sa</property>
 		<property name="connection.password">123456</property>
@@ -20,7 +20,12 @@
 		<property name="myeclipse.connection.profile">
 			NursingClinicalManageDB
 		</property>
-		
+		<mapping resource="model/TAdminUser.hbm.xml" />
+		<mapping resource="model/TSystemModel.hbm.xml" />
+		<mapping resource="model/VRoleSystemModel.hbm.xml" />
+		<mapping resource="model/TAdminRole.hbm.xml" />
+		<mapping resource="model/VAdminru.hbm.xml" />
+
 
 	</session-factory>
 

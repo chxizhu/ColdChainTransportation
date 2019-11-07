@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-reverse-engineering-3.0.dtd" >
+
+<hibernate-reverse-engineering>
+	<table name="T_AdminUser" schema="dbo"
+		catalog="ColdChainTransportationDB" class="model.TAdminUser">
+		<primary-key>
+			<generator class="assigned"></generator>
+		</primary-key>
+	</table>
+	<table name="T_SystemModel" schema="dbo"
+		catalog="ColdChainTransportationDB" class="model.TSystemModel">
+		<primary-key>
+			<generator class="identity"></generator>
+		</primary-key>
+	</table>
+	<table name="V_RoleSystem" schema="dbo"
+		catalog="ColdChainTransportationDB" class="model.VRoleSystemModel">
+		<primary-key>
+			<generator class="identity"></generator>
+		</primary-key>
+	</table>
+	<table name="T_AdminRole" schema="dbo"
+		catalog="ColdChainTransportationDB" class="model.TAdminRole">
+		<primary-key>
+			<generator class="identity"></generator>
+		</primary-key>
+	</table>
+<table name="V_AdminRU" schema="dbo" catalog="ColdChainTransportationDB"
+	class="model.VAdminru">
+	<primary-key>
+		<generator class="identity"></generator>
+	</primary-key>
+</table>
+</hibernate-reverse-engineering>
