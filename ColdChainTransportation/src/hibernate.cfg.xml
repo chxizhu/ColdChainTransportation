@@ -25,6 +25,17 @@
 		<mapping resource="model/VRoleSystemModel.hbm.xml" />
 		<mapping resource="model/TAdminRole.hbm.xml" />
 		<mapping resource="model/VAdminru.hbm.xml" />
+		<mapping resource="model/TAbnormalRR.hbm.xml" />
+		<mapping resource="model/TCar.hbm.xml" />
+		<mapping resource="model/TCheckInRecord.hbm.xml" />
+		<mapping resource="model/TDutyArrange.hbm.xml" />
+		<mapping resource="model/TLine.hbm.xml" />
+		<mapping resource="model/TLineArrange.hbm.xml" />
+		<mapping resource="model/TLineTR.hbm.xml" />
+		<mapping resource="model/TPunchTheTloc.hbm.xml" />
+		<mapping resource="model/TRealTimePosition.hbm.xml" />
+		<mapping resource="model/TTemperature.hbm.xml" />
+		<mapping resource="model/TUser.hbm.xml" />
 
 
 	</session-factory>

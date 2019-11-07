@@ -26,10 +26,76 @@
 			<generator class="identity"></generator>
 		</primary-key>
 	</table>
-<table name="V_AdminRU" schema="dbo" catalog="ColdChainTransportationDB"
-	class="model.VAdminru">
+	<table name="V_AdminRU" schema="dbo"
+		catalog="ColdChainTransportationDB" class="model.VAdminru">
+		<primary-key>
+			<generator class="identity"></generator>
+		</primary-key>
+	</table>
+	<table name="T_AbnormalRR" schema="dbo"
+		catalog="ColdChainTransportationDB" class="model.TAbnormalRR">
+		<primary-key>
+			<generator class="identity"></generator>
+		</primary-key>
+	</table>
+	<table name="T_Car" schema="dbo" catalog="ColdChainTransportationDB"
+		class="model.TCar">
+		<primary-key>
+			<generator class="identity"></generator>
+		</primary-key>
+	</table>
+	<table name="T_CheckInRecord" schema="dbo"
+		catalog="ColdChainTransportationDB" class="model.TCheckInRecord">
+		<primary-key>
+			<generator class="identity"></generator>
+		</primary-key>
+	</table>
+	<table name="T_DutyArrange" schema="dbo"
+		catalog="ColdChainTransportationDB" class="model.TDutyArrange">
+		<primary-key>
+			<generator class="identity"></generator>
+		</primary-key>
+	</table>
+	<table name="T_Line" schema="dbo"
+		catalog="ColdChainTransportationDB" class="model.TLine">
+		<primary-key>
+			<generator class="identity"></generator>
+		</primary-key>
+	</table>
+	<table name="T_LineArrange" schema="dbo"
+		catalog="ColdChainTransportationDB" class="model.TLineArrange">
+		<primary-key>
+			<generator class="identity"></generator>
+		</primary-key>
+	</table>
+	<table name="T_LineTR" schema="dbo"
+		catalog="ColdChainTransportationDB" class="model.TLineTR">
+		<primary-key>
+			<generator class="identity"></generator>
+		</primary-key>
+	</table>
+	<table name="T_PunchTheTloc" schema="dbo"
+		catalog="ColdChainTransportationDB" class="model.TPunchTheTloc">
+		<primary-key>
+			<generator class="assigned"></generator>
+		</primary-key>
+	</table>
+	<table name="T_RealTimePosition" schema="dbo"
+		catalog="ColdChainTransportationDB" class="model.TRealTimePosition">
+		<primary-key>
+			<generator class="identity"></generator>
+		</primary-key>
+	</table>
+	<table name="T_Temperature" schema="dbo"
+		catalog="ColdChainTransportationDB" class="model.TTemperature">
+		<primary-key>
+			<generator class="identity"></generator>
+		</primary-key>
+	</table>
+<table name="T_User" schema="dbo" catalog="ColdChainTransportationDB"
+	class="model.TUser">
 	<primary-key>
-		<generator class="identity"></generator>
+		<generator class="assigned"></generator>
 	</primary-key>
 </table>
 </hibernate-reverse-engineering>
