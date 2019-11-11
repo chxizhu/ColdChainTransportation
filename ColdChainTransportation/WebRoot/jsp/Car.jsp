@@ -58,12 +58,14 @@
 			border: none;
 			margin-top: 0;
 		}
+		
 		#add-blogUser {
 			display: none;
 			z-index: 999 !important;
 		}
+		
 		#add-blogUser .artTypeLayer {
-			height:350px;
+			height:500px;
 			width: 90%;
 			margin-left: auto;
 			margin-right: auto;
@@ -88,24 +90,12 @@
 		<table class="layui-table">
 		    <tbody>
 		      <tr>
-		        <td class="tdbck">账号</td>
-		        <td><span id="userid"></span></td>
+		        <td class="tdbck">ID</td>
+		        <td><span id="txtclaid"></span></td>
 		      </tr>
 		      <tr>
-		        <td class="tdbck">姓名</td>
-		        <td><span id="username"></span></td>
-		      </tr>
-		      <tr>
-		        <td class="tdbck">性别</td>
-		        <td><span id="sex"></span></td>
-		      </tr>
-		      <tr>
-		        <td class="tdbck">电话</td>
-		        <td><span id="tel"></span></td>
-		      </tr>
-		      <tr>
-		        <td class="tdbck">状态</td>
-		        <td><span id="status"></span></td>
+		        <td class="tdbck">角色名称</td>
+		        <td><span id="txtadminuserrealname"></span></td>
 		      </tr>
 		     
 		    </tbody>
@@ -117,7 +107,7 @@
 		<!-- 条件筛选框Start -->
 		<blockquote class="layui-elem-quote not_border_left">
 			<form class="layui-form" action="">		   
-				<button type="button" class="layui-btn layui-bg-blue" id="addartType" lay-event="addartType" lay-filter="addartType" style="margin-left: 10px;">添加司机</button>
+				<button type="button" class="layui-btn layui-bg-blue" id="addartType" lay-event="addartType" lay-filter="addartType" style="margin-left: 10px;">添加用户</button>
 			</form>
 		</blockquote>
 		<!-- 条件筛选框End -->
@@ -125,7 +115,6 @@
 		<table class="layui-hide" name="blogUser" id="blogUser" lay-filter="blogUser"></table>
 
 		<script type="text/html" id="barDemo">
- 			<a class="layui-btn layui-btn-xs" lay-event="seluser">打电话</a>
 			<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
 		</script>
 
@@ -133,6 +122,17 @@
 		<div id="add-blogUser" >
 			<div class="artTypeLayer">
 				<form class="layui-form" action="">
+				 <div class="layui-form-item">   
+    <div class="layui-inline">
+      <label class="layui-form-label">角色：</label>
+      <div class="layui-input-block">
+				       	 <select name="adminrole" id="adminrole" lay-filter="roleid">
+						 <option value="00">请选择角色</option>						
+						 </select>	
+				      </div>
+    </div>
+    </div>
+					
     			   <div class="layui-form-item">
               <label for="phone" class="layui-form-label">
               	 账号：
@@ -165,7 +165,7 @@
                                                密码：
               </label>
               <div class="layui-input-inline">
-                  <input type="text" id="pwd" name="pwd" 
+                  <input type="text" id="userpwd" name="userpwd" 
                   autocomplete="off" class="layui-input">
               </div>             
           </div>  	
@@ -174,21 +174,8 @@
                                                电话：
               </label>
               <div class="layui-input-inline">
-                  <input type="text" id="tel" name="tel" 
+                  <input type="text" id="phone" name="phone" 
                   autocomplete="off" class="layui-input">
-              </div>             
-          </div>  
-           <div class="layui-form-item">
-    		<label class="layui-form-label">状态</label>
-    <div class="layui-input-block">
-        <input type="checkbox" checked="" name="open" lay-skin="switch" lay-filter="switchTest" lay-text="ON|OFF">
-    </div>
-  </div>
-  <div class="layui-form-item">
-              <label for="phone" class="layui-form-label">
-              </label>
-              <div class="layui-input-inline">
-                  <input type="text" id="status" name="status" style="display:none;"  autocomplete="off" class="layui-input">
               </div>             
           </div>  
 				</form>
@@ -210,8 +197,8 @@
 		table.render({
 			elem : '#blogUser',
 			id:'blogUserid',
-			url : '../User/select',
-			title : '添加司机',
+			url : '../AdminUser/select',
+			title : '病人生活数据表',
 			height: "full-160",
 			skin : 'line',
 			even : true,
@@ -226,7 +213,7 @@
 					title : '账号',
 					align : 'center'
 				}, {
-					field : 'userName',
+					field : 'username',
 					title : '姓名',
 					align : 'center'
 				}, {
@@ -234,14 +221,14 @@
 					align : 'center',
 					title : '性别',
 				}, {
-					field : 'tel',
+					field : 'phone',
 					align : 'center',
 					title : '电话'
-				}, {
-					field : 'status',
+				},{
+					title : '角色',
+					field : 'name',
 					align : 'center',
-					title : '状态',
-				}, {
+				},{
 					title : '操作',
 					toolbar : '#barDemo',
 					align : 'center'
@@ -262,7 +249,7 @@
 			table.render({
 				elem : '#blogUser',
 				url : '../systemmodel/roleListByName?userName='+useridornickname,
-				title : '添加司机',
+				title : '病人生活数据表',
 				height: "full-160",
 				skin : 'line',
 				even : true,
@@ -316,12 +303,12 @@
 		$("#addartType").click(function(){
 			$("#userid").val("");
 			$("#username").val("");
-			$("#pwd").val("");
-			$("#tel").val("");
+			$("#userpwd").val("");
+			$("#phone").val("");
 			
 			layer.open({
 				type : 1,
-				title : '添加司机',
+				title : '病人日常生活添加',
 				area : [ '450px', '335px' ],
 				shade : 0.4,
 				content : $('#add-blogUser'),
@@ -329,10 +316,10 @@
 				yes : function() {
 					var userid = $("#userid").val().trim();
 					var username = $("#username").val().trim();
-					var pwd = $("#pwd").val().trim();
-					var tel = $("#tel").val().trim();
+					var userpwd = $("#userpwd").val().trim();
+					var phone = $("#phone").val().trim();
 					var sex = $('input:radio:checked').val();
-					var status = $("#status").val().trim();
+					var adminrole = $("#adminrole").val().trim();
 					
 
 					if(userid == "") {
@@ -343,17 +330,17 @@
 						layer.tips('不能为空', '#username');
 						return;
 					}
-					if(pwd == "") {
-						layer.tips('不能为空', '#pwd');
+					if(userpwd == "") {
+						layer.tips('不能为空', '#userpwd');
 						return;
 					} 
-					if(tel == "") {
-						layer.tips('不能为空', '#tel');
+					if(phone == "") {
+						layer.tips('不能为空', '#phone');
 						return;
 					} 
 					$.ajax({
 						type : 'get',
-						url : '../User/add?userid='+userid+'&username='+username+'&pwd='+pwd+'&tel='+tel+'&sex='+sex+'&status='+status,
+						url : '../AdminUser/add?userid='+userid+'&username='+username+'&userpwd='+userpwd+'&adminrole='+adminrole+'&phone='+phone+'&sex='+sex,
 						datatype : 'json',
 						success : function(data) {
 							if (data.code == "0") {
@@ -383,11 +370,6 @@
 			});
 		});
 		
-		//监听指定开关
-  form.on('switch(switchTest)', function(data){
-    var msg = (this.checked ? 'true' : 'false');
-    $("#status").val(msg);
-  });
 		
 	/* 动态加载用户角色 */
 	$(function() {
@@ -417,11 +399,9 @@
 		//表格工具栏事件 
 		table.on('tool(blogUser)', function(obj) {
 			var data = obj.data;
-			$("#userid").text(data.userid);
-			$("#username").text(data.userName);
-			$("#tel").text(data.tel);
-			$("#sex").text(data.sex);
-			$("#status").text(data.status);
+			$("#txtclaid").text(data.roleid);
+			$("#txtadminuserrealname").text(data.rolename);
+			$("#txtadminuserusertype").text(data.authorityId);
 			
 			
 			switch (obj.event) {
@@ -429,7 +409,7 @@
 					layer.open({
 				        type: 1, 
 				        title: '管理员信息详情',
-				        area: ['400px', '430px'],
+				        area: ['600px', '430px'],
 				        shade: 0.8,
 				        content: $('#adminuserdetail'),
 				        btn: ['返回'], 
@@ -451,7 +431,7 @@
 					}, function(){
 						$.ajax({
 			        		type: 'get',
-			        		url: "../User/delect?userid=" + data.userid,
+			        		url: "../AdminUser/delect?userid=" + data.userid,
 			        		dataType: 'json',
 			        		success:function(data){
 			        			if(data.code == 0){
@@ -501,6 +481,7 @@
       obj.preview(function(index, file, result){
         $('#demo1').attr('src', result); //图片链接（base64）
          console.log(file);
+      
          $("#photoid").attr("value",file.name);
          
       });
