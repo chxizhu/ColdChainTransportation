@@ -86,7 +86,7 @@ public class UserController {
 	 *
 	 */
 	@RequestMapping(value = "/add")
-	public void addJudges(String userid, String userName,String pwd, int adminrole,
+	public void addJudges(String userid, String username,String pwd,
 			String tel, String sex,Boolean status,
 			HttpServletRequest request, HttpServletResponse response,
 			Model model) throws IOException {
@@ -95,7 +95,7 @@ public class UserController {
 		
 		TUser ts = new TUser();
 		ts.setUserid(userid);
-		ts.setUserName(userName);
+		ts.setUserName(username);
 		ts.setSex(sex);
 		ts.setPwd(pwd);
 		ts.setTel(tel);

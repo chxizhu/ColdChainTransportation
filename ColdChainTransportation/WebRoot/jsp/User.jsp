@@ -174,6 +174,13 @@
         <input type="checkbox" checked="" name="open" lay-skin="switch" lay-filter="switchTest" lay-text="ON|OFF">
     </div>
   </div>
+  <div class="layui-form-item">
+              <label for="phone" class="layui-form-label">
+              </label>
+              <div class="layui-input-inline">
+                  <input type="text" id="status" name="status" style="display:none;"  autocomplete="off" class="layui-input">
+              </div>             
+          </div>  
 				</form>
 			</div>
 		</div>
@@ -209,7 +216,7 @@
 					title : '账号',
 					align : 'center'
 				}, {
-					field : 'username',
+					field : 'userName',
 					title : '姓名',
 					align : 'center'
 				}, {
@@ -220,7 +227,11 @@
 					field : 'tel',
 					align : 'center',
 					title : '电话'
-				},{
+				}, {
+					field : 'status',
+					align : 'center',
+					title : '状态',
+				}, {
 					title : '操作',
 					toolbar : '#barDemo',
 					align : 'center'
@@ -295,8 +306,8 @@
 		$("#addartType").click(function(){
 			$("#userid").val("");
 			$("#username").val("");
-			$("#userpwd").val("");
-			$("#phone").val("");
+			$("#pwd").val("");
+			$("#tel").val("");
 			
 			layer.open({
 				type : 1,
@@ -308,10 +319,10 @@
 				yes : function() {
 					var userid = $("#userid").val().trim();
 					var username = $("#username").val().trim();
-					var userpwd = $("#userpwd").val().trim();
-					var phone = $("#phone").val().trim();
+					var pwd = $("#pwd").val().trim();
+					var tel = $("#tel").val().trim();
 					var sex = $('input:radio:checked').val();
-					var adminrole = $("#adminrole").val().trim();
+					var status = $("#status").val().trim();
 					
 
 					if(userid == "") {
@@ -322,17 +333,17 @@
 						layer.tips('不能为空', '#username');
 						return;
 					}
-					if(userpwd == "") {
-						layer.tips('不能为空', '#userpwd');
+					if(pwd == "") {
+						layer.tips('不能为空', '#pwd');
 						return;
 					} 
-					if(phone == "") {
-						layer.tips('不能为空', '#phone');
+					if(tel == "") {
+						layer.tips('不能为空', '#tel');
 						return;
 					} 
 					$.ajax({
 						type : 'get',
-						url : '../AdminUser/add?userid='+userid+'&username='+username+'&userpwd='+userpwd+'&adminrole='+adminrole+'&phone='+phone+'&sex='+sex,
+						url : '../User/add?userid='+userid+'&username='+username+'&pwd='+pwd+'&tel='+tel+'&sex='+sex+'&status='+status,
 						datatype : 'json',
 						success : function(data) {
 							if (data.code == "0") {
@@ -364,9 +375,8 @@
 		
 		//监听指定开关
   form.on('switch(switchTest)', function(data){
-      layer.msg((this.checked ? 'true' : 'false'), {
-      offset: '6px'
-    });
+    var msg = (this.checked ? 'true' : 'false');
+    $("#status").val(msg);
   });
 		
 	/* 动态加载用户角色 */
