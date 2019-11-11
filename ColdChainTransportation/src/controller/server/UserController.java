@@ -7,8 +7,8 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import model.TAdminRole;
 import model.TAdminUser;
+import model.TUser;
 import model.VAdminru;
 
 import org.springframework.stereotype.Controller;
@@ -17,46 +17,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import util.ReturnData;
 import business.dao.AdminUserModelDAO;
-import business.dao.RoleModelDAO;
+import business.dao.UserModelDAO;
 import business.impl.AdminUserModelDAOImpl;
-import business.impl.RoleModelDAOImpl;
+import business.impl.UserModelDAOImpl;
 
 import com.alibaba.fastjson.JSON;
 
 @Controller
-@RequestMapping(value = "/AdminRole")
-public class RoleController {
-	/**
-	 * Á≥ªÁªüÁôªÂΩïÊìç‰Ωú‰∏öÂä°ÊéßÂà∂Á±?
-	 * @author select
-	 *
-	 */
-	@RequestMapping(value = "/xlselect")
-	public void getpatientlist(
-			HttpServletRequest request, HttpServletResponse response,
-			Model model) throws IOException {
-		
-		RoleModelDAO pdao = new RoleModelDAOImpl();
-		List<TAdminRole> List = pdao.seletRolelist();
-		// ªÿ¥´json◊÷∑˚¥Æ
-		response.setCharacterEncoding("utf-8");
-		response.setContentType("application/json");
-		PrintWriter out = response.getWriter();
-		ReturnData td = new ReturnData();
-		if (List != null) {
-			td.code = ReturnData.SUCCESS;
-			td.msg = "≤È—Ø≥…π¶";
-			td.data = List;
-		} else {
-			td.code = ReturnData.ERROR;
-			td.msg = "≤È—Ø ß∞‹";
-		}
-		out.write(JSON.toJSONString(td));
-		out.flush();
-		out.close();
-
-	}
-	
+@RequestMapping(value = "/User")
+public class UserController {
 	/**
 	 * Á≥ªÁªüÁôªÂΩïÊìç‰Ωú‰∏öÂä°ÊéßÂà∂Á±?
 	 * @author select
@@ -67,8 +36,8 @@ public class RoleController {
 			HttpServletRequest request, HttpServletResponse response,
 			Model model) throws IOException {
 		
-		RoleModelDAO pdao = new RoleModelDAOImpl();
-		List<TAdminRole> List = pdao.seletrole(page, limit);
+		UserModelDAO adao = new UserModelDAOImpl();
+		List<TUser> List = adao.seletUsers(page, limit);
 		// ªÿ¥´json◊÷∑˚¥Æ
 		response.setCharacterEncoding("utf-8");
 		response.setContentType("application/json");
@@ -88,25 +57,51 @@ public class RoleController {
 
 	}
 	
+	@RequestMapping(value = "/delect")
+	public void deletejudges(String userid, HttpServletRequest request,
+			HttpServletResponse response, Model model) throws IOException {
+
+		UserModelDAO adao = new UserModelDAOImpl();
+		 boolean num= adao.deleteUsers(userid); 
+
+		response.setCharacterEncoding("utf-8");
+		response.setContentType("application/json");
+		PrintWriter out = response.getWriter();
+		ReturnData td = new ReturnData();
+		if (num == true) {
+			td.code = ReturnData.SUCCESS;
+			td.msg = "…æ≥˝≥…π¶";
+		} else {
+			td.code = ReturnData.ERROR;
+			td.msg = "…æ≥˝ ß∞‹£¨«Î÷ÿ ‘";
+		}
+		out.write(JSON.toJSONString(td));
+		out.flush();
+		out.close();
+	}
+	
 	/**
 	 *
 	 * @author add
 	 *
 	 */
 	@RequestMapping(value = "/add")
-	public void addJudges(String name, String description,
+	public void addJudges(String userid, String userName,String pwd, int adminrole,
+			String tel, String sex,Boolean status,
 			HttpServletRequest request, HttpServletResponse response,
 			Model model) throws IOException {
 		
-		RoleModelDAO pdao = new RoleModelDAOImpl();
+		UserModelDAO adao = new UserModelDAOImpl();
 		
-		TAdminRole ts = new TAdminRole();
-		ts.setName(name);
-		ts.setDescription(description);
-		ts.setParentid(0);
-		ts.setDeepth(0);
-
-		int num = pdao.addrole(ts);
+		TUser ts = new TUser();
+		ts.setUserid(userid);
+		ts.setUserName(userName);
+		ts.setSex(sex);
+		ts.setPwd(pwd);
+		ts.setTel(tel);
+		ts.setStatus(status);
+		
+		int num = adao.addUsers(ts);
 		
 		response.setCharacterEncoding("utf-8");
 		response.setContentType("application/json");
@@ -118,30 +113,6 @@ public class RoleController {
 		} else {
 			td.code = ReturnData.ERROR;
 			td.msg = "ÃÌº” ß∞‹";
-		}
-		out.write(JSON.toJSONString(td));
-		out.flush();
-		out.close();
-	}
-	
-	@RequestMapping(value = "/delect")
-	public void deletejudges(int id, HttpServletRequest request,
-			HttpServletResponse response, Model model) throws IOException {
-
-		 RoleModelDAO pdao = new RoleModelDAOImpl();
-		 boolean num= pdao.deleterole(id); 
-
-		response.setCharacterEncoding("utf-8");
-		response.setContentType("application/json");
-		PrintWriter out = response.getWriter();
-		ReturnData td = new ReturnData();
-		if (num == true) {
-			td.code = ReturnData.SUCCESS;
-			td.msg = "…æ≥˝≥…π¶";
-
-		} else {
-			td.code = ReturnData.ERROR;
-			td.msg = "…æ≥˝ ß∞‹£¨«Î÷ÿ ‘";
 		}
 		out.write(JSON.toJSONString(td));
 		out.flush();

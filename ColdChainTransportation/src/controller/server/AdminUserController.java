@@ -109,7 +109,6 @@ public class AdminUserController {
 		if (num == true) {
 			td.code = ReturnData.SUCCESS;
 			td.msg = "É¾³ı³É¹¦";
-
 		} else {
 			td.code = ReturnData.ERROR;
 			td.msg = "É¾³ıÊ§°Ü£¬ÇëÖØÊÔ";

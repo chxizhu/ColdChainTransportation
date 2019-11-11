@@ -107,7 +107,7 @@
 		<!-- 条件筛选框Start -->
 		<blockquote class="layui-elem-quote not_border_left">
 			<form class="layui-form" action="">		   
-				<button type="button" class="layui-btn layui-bg-blue" id="addartType" lay-event="addartType" lay-filter="addartType" style="margin-left: 10px;">添加用户</button>
+				<button type="button" class="layui-btn layui-bg-blue" id="addartType" lay-event="addartType" lay-filter="addartType" style="margin-left: 10px;">添加司机</button>
 			</form>
 		</blockquote>
 		<!-- 条件筛选框End -->
@@ -116,23 +116,13 @@
 
 		<script type="text/html" id="barDemo">
 			<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+			<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="tel">打电话</a>
 		</script>
 
 		<!-- 用户信息添加Start -->
 		<div id="add-blogUser" >
 			<div class="artTypeLayer">
 				<form class="layui-form" action="">
-				 <div class="layui-form-item">   
-    <div class="layui-inline">
-      <label class="layui-form-label">角色：</label>
-      <div class="layui-input-block">
-				       	 <select name="adminrole" id="adminrole" lay-filter="roleid">
-						 <option value="00">请选择角色</option>						
-						 </select>	
-				      </div>
-    </div>
-    </div>
-					
     			   <div class="layui-form-item">
               <label for="phone" class="layui-form-label">
               	 账号：
@@ -165,7 +155,7 @@
                                                密码：
               </label>
               <div class="layui-input-inline">
-                  <input type="text" id="userpwd" name="userpwd" 
+                  <input type="text" id="pwd" name="pwd" 
                   autocomplete="off" class="layui-input">
               </div>             
           </div>  	
@@ -174,10 +164,16 @@
                                                电话：
               </label>
               <div class="layui-input-inline">
-                  <input type="text" id="phone" name="phone" 
+                  <input type="text" id="tel" name="tel" 
                   autocomplete="off" class="layui-input">
               </div>             
           </div>  
+           <div class="layui-form-item">
+    		<label class="layui-form-label">状态</label>
+    <div class="layui-input-block">
+        <input type="checkbox" checked="" name="open" lay-skin="switch" lay-filter="switchTest" lay-text="ON|OFF">
+    </div>
+  </div>
 				</form>
 			</div>
 		</div>
@@ -197,8 +193,8 @@
 		table.render({
 			elem : '#blogUser',
 			id:'blogUserid',
-			url : '../AdminUser/select',
-			title : '病人生活数据表',
+			url : '../User/select',
+			title : '添加司机',
 			height: "full-160",
 			skin : 'line',
 			even : true,
@@ -221,13 +217,9 @@
 					align : 'center',
 					title : '性别',
 				}, {
-					field : 'phone',
+					field : 'tel',
 					align : 'center',
 					title : '电话'
-				},{
-					title : '角色',
-					field : 'name',
-					align : 'center',
 				},{
 					title : '操作',
 					toolbar : '#barDemo',
@@ -249,7 +241,7 @@
 			table.render({
 				elem : '#blogUser',
 				url : '../systemmodel/roleListByName?userName='+useridornickname,
-				title : '病人生活数据表',
+				title : '添加司机',
 				height: "full-160",
 				skin : 'line',
 				even : true,
@@ -308,7 +300,7 @@
 			
 			layer.open({
 				type : 1,
-				title : '病人日常生活添加',
+				title : '添加司机',
 				area : [ '450px', '335px' ],
 				shade : 0.4,
 				content : $('#add-blogUser'),
@@ -370,6 +362,12 @@
 			});
 		});
 		
+		//监听指定开关
+  form.on('switch(switchTest)', function(data){
+      layer.msg((this.checked ? 'true' : 'false'), {
+      offset: '6px'
+    });
+  });
 		
 	/* 动态加载用户角色 */
 	$(function() {
@@ -431,7 +429,7 @@
 					}, function(){
 						$.ajax({
 			        		type: 'get',
-			        		url: "../AdminUser/delect?userid=" + data.userid,
+			        		url: "../User/delect?userid=" + data.userid,
 			        		dataType: 'json',
 			        		success:function(data){
 			        			if(data.code == 0){
@@ -481,7 +479,6 @@
       obj.preview(function(index, file, result){
         $('#demo1').attr('src', result); //图片链接（base64）
          console.log(file);
-      
          $("#photoid").attr("value",file.name);
          
       });

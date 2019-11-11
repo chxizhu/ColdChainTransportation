@@ -107,7 +107,7 @@
 		<!-- 条件筛选框Start -->
 		<blockquote class="layui-elem-quote not_border_left">
 			<form class="layui-form" action="">		   
-				<button type="button" class="layui-btn layui-bg-blue" id="addartType" lay-event="addartType" lay-filter="addartType" style="margin-left: 10px;">添加用户</button>
+				<button type="button" class="layui-btn layui-bg-blue" id="addartType" lay-event="addartType" lay-filter="addartType" style="margin-left: 10px;">添加角色</button>
 			</form>
 		</blockquote>
 		<!-- 条件筛选框End -->
@@ -117,67 +117,27 @@
 		<script type="text/html" id="barDemo">
 			<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
 		</script>
-
 		<!-- 用户信息添加Start -->
 		<div id="add-blogUser" >
 			<div class="artTypeLayer">
 				<form class="layui-form" action="">
-				 <div class="layui-form-item">   
-    <div class="layui-inline">
-      <label class="layui-form-label">角色：</label>
-      <div class="layui-input-block">
-				       	 <select name="adminrole" id="adminrole" lay-filter="roleid">
-						 <option value="00">请选择角色</option>						
-						 </select>	
-				      </div>
-    </div>
-    </div>
-					
     			   <div class="layui-form-item">
               <label for="phone" class="layui-form-label">
-              	 账号：
+              	 名称：
               </label>
               <div class="layui-input-inline">
-                  <input type="text" id="userid" name="userid" 
+                  <input type="text" id="name" name="name" 
                   autocomplete="off" class="layui-input">
               </div>             
           </div>
            <div class="layui-form-item">
               <label for="L_email" class="layui-form-label">
-                                                       姓名：
+                                                       描述：
               </label>
               <div class="layui-input-inline">
-                  <input type="text" id="username" name="username" 
-                  autocomplete="off" class="layui-input">
+                  <textarea style = "width:230px;height:200px;margin-top:10px;" name="description"  id="description"  placeholder="请输入内容" class="layui-textarea"></textarea>
               </div>              
           </div>
- 			<div class="layui-form-item">
-              <label for="L_email" class="layui-form-label">
-                                                       性别：
-              </label>
-              <div class="layui-input-inline">
-                  <input type="radio" name="sex" value="男" title="男">
-      			  <input type="radio" name="sex" value="女" title="女">     
-              </div>              
-          </div>
-          <div class="layui-form-item">
-              <label for="phone" class="layui-form-label">
-                                               密码：
-              </label>
-              <div class="layui-input-inline">
-                  <input type="text" id="userpwd" name="userpwd" 
-                  autocomplete="off" class="layui-input">
-              </div>             
-          </div>  	
-          <div class="layui-form-item">
-              <label for="phone" class="layui-form-label">
-                                               电话：
-              </label>
-              <div class="layui-input-inline">
-                  <input type="text" id="phone" name="phone" 
-                  autocomplete="off" class="layui-input">
-              </div>             
-          </div>  
 				</form>
 			</div>
 		</div>
@@ -197,8 +157,8 @@
 		table.render({
 			elem : '#blogUser',
 			id:'blogUserid',
-			url : '../AdminUser/select',
-			title : '病人生活数据表',
+			url : '../AdminRole/select',
+			title : '角色添加',
 			height: "full-160",
 			skin : 'line',
 			even : true,
@@ -209,26 +169,18 @@
 					align : 'center',
 					width : 80
 				},{
-					field : 'userid',
+					field : 'id',
 					title : '账号',
 					align : 'center'
 				}, {
-					field : 'username',
+					field : 'name',
 					title : '姓名',
 					align : 'center'
 				}, {
-					field : 'sex',
+					field : 'description',
 					align : 'center',
-					title : '性别',
+					title : '描述',
 				}, {
-					field : 'phone',
-					align : 'center',
-					title : '电话'
-				},{
-					title : '角色',
-					field : 'name',
-					align : 'center',
-				},{
 					title : '操作',
 					toolbar : '#barDemo',
 					align : 'center'
@@ -249,7 +201,7 @@
 			table.render({
 				elem : '#blogUser',
 				url : '../systemmodel/roleListByName?userName='+useridornickname,
-				title : '病人生活数据表',
+				title : '角色添加',
 				height: "full-160",
 				skin : 'line',
 				even : true,
@@ -301,46 +253,31 @@
 		
 		/* 添加一个网站用户 */
 		$("#addartType").click(function(){
-			$("#userid").val("");
-			$("#username").val("");
-			$("#userpwd").val("");
-			$("#phone").val("");
+			$("#name").val("");
+			$("#description").val("");
 			
 			layer.open({
 				type : 1,
-				title : '病人日常生活添加',
+				title : '角色添加',
 				area : [ '450px', '335px' ],
 				shade : 0.4,
 				content : $('#add-blogUser'),
 				btn : [ '保存', '返回' ],
 				yes : function() {
-					var userid = $("#userid").val().trim();
-					var username = $("#username").val().trim();
-					var userpwd = $("#userpwd").val().trim();
-					var phone = $("#phone").val().trim();
-					var sex = $('input:radio:checked').val();
-					var adminrole = $("#adminrole").val().trim();
-					
-
-					if(userid == "") {
-						layer.tips('不能为空', '#userid');
+					var name = $("#name").val().trim();
+					var description = $("#description").val().trim();
+			
+					if(name == "") {
+						layer.tips('不能为空', '#name');
 						return;
 					} 
-					if(username==""){
-						layer.tips('不能为空', '#username');
-						return;
-					}
-					if(userpwd == "") {
-						layer.tips('不能为空', '#userpwd');
-						return;
-					} 
-					if(phone == "") {
-						layer.tips('不能为空', '#phone');
+					if(description == "") {
+						layer.tips('不能为空', '#description');
 						return;
 					} 
 					$.ajax({
 						type : 'get',
-						url : '../AdminUser/add?userid='+userid+'&username='+username+'&userpwd='+userpwd+'&adminrole='+adminrole+'&phone='+phone+'&sex='+sex,
+						url : '../AdminRole/add?name='+name+'&description='+description,
 						datatype : 'json',
 						success : function(data) {
 							if (data.code == "0") {
@@ -431,7 +368,7 @@
 					}, function(){
 						$.ajax({
 			        		type: 'get',
-			        		url: "../AdminUser/delect?userid=" + data.userid,
+			        		url: "../AdminRole/delect?id=" + data.id,
 			        		dataType: 'json',
 			        		success:function(data){
 			        			if(data.code == 0){
