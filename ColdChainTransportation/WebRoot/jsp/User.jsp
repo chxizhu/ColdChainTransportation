@@ -458,6 +458,43 @@
 			
 		//拨打电话
 		table.on('tool(blogUser)', function(obj) {
+		
+		  var iVer = 1;//第一个版本
+
+            check_ver(iVer, function (nRet) {
+                var szHint = "";
+                switch (nRet) {
+                   case W_OK://检查成功
+                        szHint = "驱动安装成功，点击确定进入拨打电话界面";
+                        editCall.Call(data[0]);      //打开通话界面                          
+                        OpenDevice(ODT_LBRIDGE, function (nResult) { AppendStatus('打开设备.'); });      //打开设备
+                        TV_EnableMic(0, TRUE);  //打开MIC
+                        TV_EnableLine2Spk(0, TRUE);//打开耳机
+                        break;
+                    case W_TRY://试用
+                       szHint = "试用版本已安装成功";
+                        AppendStatus(szHint);
+                        alert(szHint);
+                        break;
+                    case W_NO_FOUND://没有找到校验服务器
+                        szHint = "没有找到校验服务器";
+                        AppendStatus(szHint);
+                        alert(szHint);
+                        break;
+                    case W_EXCEED_NUM:
+                        szHint = "校验服务器超过用户数了";
+                        AppendStatus(szHint);
+                        alert(szHint);
+                        break;
+                   default:
+                        szHint = "没有安装本地驱动，请下载";
+                        AppendStatus(szHint);
+                        alert(szHint);
+                        break;
+                }
+
+            }); 
+		
 			var data = obj.data;
 			//alert(data);
 			$("#userid").text(data.userid);
@@ -554,5 +591,14 @@
  
 });
 	</script>
+	
+	<!-- 拨打电话引用js开始 -->
+<script type="text/javascript" src="../js/ZPjs/deviceapi.js"></script>
+    <script type="text/javascript" src="../js/ZPjs/json2.js"></script>
+    <script type="text/javascript" src="../js/ZPjs/qnvfunc.js"></script>
+    <script type="text/javascript" src="../js/ZPjs/qnviccub.js"></script>
+    <script type="text/javascript" src="../js/ZPjs/ZP_event.js"></script>
+<!-- 拨打电话引用js结束 -->
+	
 </body>
 </html>
