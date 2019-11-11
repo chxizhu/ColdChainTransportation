@@ -65,7 +65,7 @@
 		}
 		
 		#add-blogUser .artTypeLayer {
-			height:500px;
+			height:350px;
 			width: 90%;
 			margin-left: auto;
 			margin-right: auto;
@@ -417,7 +417,7 @@
 					layer.open({
 				        type: 1, 
 				        title: '管理员信息详情',
-				        area: ['600px', '430px'],
+				        area: ['400px', '430px'],
 				        shade: 0.8,
 				        content: $('#adminuserdetail'),
 				        btn: ['返回'], 
