@@ -85,7 +85,6 @@ public class SystemModelController {
 			td.count = list.size();
 			td.msg = "查询成功，共查出" + td.count + "条记录";
 			td.data = list;
-			System.out.println(JSON.toJSON(list));
 		}else{
 			td.code = LayuiTableDataJSON.FLAG_FAIL;
 			td.msg = "查询失败";

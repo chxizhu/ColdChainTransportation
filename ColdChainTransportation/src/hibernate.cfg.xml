@@ -10,7 +10,7 @@
 			org.hibernate.dialect.SybaseAnywhereDialect
 		</property>
 		<property name="connection.url">
-			jdbc:sqlserver://localhost:5652;DatabaseName=ColdChainTransportationDB
+			jdbc:sqlserver://localhost:1433;DatabaseName=FileManagementSystemDB
 		</property>
 		<property name="connection.username">sa</property>
 		<property name="connection.password">123456</property>

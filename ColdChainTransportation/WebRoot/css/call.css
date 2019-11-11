@@ -1,0 +1,132 @@
+    #divCall #call-top button{
+        margin-left:10px;
+        margin-top:10px;
+    }
+    #call_record {
+        margin-left:79px;
+        margin-top:10px;
+    }
+    #call_record button{
+        margin-left:19px
+    }
+
+    #openOrClose{
+         margin-left:79px;
+        margin-top:10px;
+    }
+
+     #openOrClose button{
+        margin-left:20px
+    }
+
+    #StatusArea {
+        height:50px;
+        margin-left:10px;
+        margin-top:60px;
+        width:760px
+    }
+
+     #call-top-left{
+    margin-left:10px;
+    width:400px;
+    height:250px;
+     }
+     #call-top-right{
+    margin-top:-215px;
+    margin-left:425px;
+    width:200px;
+    height:200px;
+    padding-left:75px
+     }
+     #call-close{
+         margin-left:10px
+     }
+     .call-inf{
+         margin-left:80px;
+         font-family:STHeiti;
+         font-size:15px
+     }
+     .call-input{
+         margin-top:30px;
+         font-size:14px
+     }
+     #call-SFQ{
+         margin-top:5px;
+     }
+     #call-SFQ-button{
+         margin-top:10px
+     }
+     #call_move{
+         /*width:100px;
+         float:left;*/
+         margin-left:-100px
+     }
+
+      #call_move_Two{
+         /*width:100px;
+         float:left;*/
+         margin-left:-100px
+     }
+
+       #call_move_Three{
+         /*width:100px;
+         float:left;*/
+         margin-left:-100px
+     }
+
+     #OneTextareaTexe{
+        float:left;
+     }
+
+     #TwoTextareaTexe{
+        float:left;
+     }
+
+     #ThreeTextareaTexe{
+        float:left;
+     }
+
+     #button-area{
+     }
+     .dialcode{
+         margin-left:90px
+     }
+
+     .call-conceal{
+         display:none;
+     }
+     .call-p{
+         margin-top:-17px;
+         margin-left:-20px
+     }
+#formCall{
+    padding-top:10px
+}
+.call-operation{
+    margin-left:10px;
+    width:700px;
+    margin-top:45px;
+}
+.button-card{
+    margin-top:10px;
+    margin-left:10px;
+    width:700px;
+}
+
+#divCall{
+    background-color:#F2F2F2;
+    height:505px;
+}
+
+.all_Textarea{
+    margin-top:-38px;
+}
+
+.move_textarea{
+    margin-top:-38px;
+}
+
+#callcard{
+	 margin-top:38px;
+	 margin-left:-30px;
+}
