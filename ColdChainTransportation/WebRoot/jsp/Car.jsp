@@ -107,7 +107,7 @@
 		<!-- 条件筛选框Start -->
 		<blockquote class="layui-elem-quote not_border_left">
 			<form class="layui-form" action="">		   
-				<button type="button" class="layui-btn layui-bg-blue" id="addartType" lay-event="addartType" lay-filter="addartType" style="margin-left: 10px;">添加用户</button>
+				<button type="button" class="layui-btn layui-bg-blue" id="addartType" lay-event="addartType" lay-filter="addartType" style="margin-left: 10px;">添加车辆</button>
 			</form>
 		</blockquote>
 		<!-- 条件筛选框End -->
@@ -122,60 +122,50 @@
 		<div id="add-blogUser" >
 			<div class="artTypeLayer">
 				<form class="layui-form" action="">
-				 <div class="layui-form-item">   
-    <div class="layui-inline">
-      <label class="layui-form-label">角色：</label>
-      <div class="layui-input-block">
-				       	 <select name="adminrole" id="adminrole" lay-filter="roleid">
-						 <option value="00">请选择角色</option>						
-						 </select>	
-				      </div>
-    </div>
-    </div>
-					
     			   <div class="layui-form-item">
               <label for="phone" class="layui-form-label">
-              	 账号：
+              	 车牌号：
               </label>
               <div class="layui-input-inline">
                   <input type="text" id="userid" name="userid" 
                   autocomplete="off" class="layui-input">
               </div>             
           </div>
-           <div class="layui-form-item">
+          <div class="layui-form-item">
+    		<label class="layui-form-label">状态：</label>
+    <div class="layui-input-block">
+        <input type="checkbox" name="open" lay-skin="switch" lay-filter="switchTest" lay-text="false|true">
+    </div>
+  </div>
+  
+  <div class="layui-form-item">
+    		<label class="layui-form-label">风扇状态：</label>
+    <div class="layui-input-block">
+        <input type="checkbox" name="open" lay-skin="switch" lay-filter="fswitchTest" lay-text="false|true">
+    </div>
+  </div>
+  
+  <div class="layui-form-item">
               <label for="L_email" class="layui-form-label">
-                                                       姓名：
+                                                       备注：
               </label>
               <div class="layui-input-inline">
-                  <input type="text" id="username" name="username" 
-                  autocomplete="off" class="layui-input">
+                  <textarea style = "width:230px;height:180px;margin-top:10px;" name="description"  id="description"  placeholder="请输入内容" class="layui-textarea"></textarea>
               </div>              
           </div>
- 			<div class="layui-form-item">
-              <label for="L_email" class="layui-form-label">
-                                                       性别：
-              </label>
-              <div class="layui-input-inline">
-                  <input type="radio" name="sex" value="男" title="男">
-      			  <input type="radio" name="sex" value="女" title="女">     
-              </div>              
-          </div>
+          
           <div class="layui-form-item">
               <label for="phone" class="layui-form-label">
-                                               密码：
               </label>
               <div class="layui-input-inline">
-                  <input type="text" id="userpwd" name="userpwd" 
-                  autocomplete="off" class="layui-input">
+                  <input type="text" id="status" name="status" style="display:none;"  autocomplete="off" class="layui-input">
               </div>             
-          </div>  	
+          </div>  
           <div class="layui-form-item">
               <label for="phone" class="layui-form-label">
-                                               电话：
               </label>
               <div class="layui-input-inline">
-                  <input type="text" id="phone" name="phone" 
-                  autocomplete="off" class="layui-input">
+                  <input type="text" id="fstatus" name="fstatus" style="display:none;"  autocomplete="off" class="layui-input">
               </div>             
           </div>  
 				</form>
@@ -198,7 +188,7 @@
 			elem : '#blogUser',
 			id:'blogUserid',
 			url : '../AdminUser/select',
-			title : '病人生活数据表',
+			title : '添加车辆',
 			height: "full-160",
 			skin : 'line',
 			even : true,
@@ -249,7 +239,7 @@
 			table.render({
 				elem : '#blogUser',
 				url : '../systemmodel/roleListByName?userName='+useridornickname,
-				title : '病人生活数据表',
+				title : '添加车辆',
 				height: "full-160",
 				skin : 'line',
 				even : true,
@@ -308,7 +298,7 @@
 			
 			layer.open({
 				type : 1,
-				title : '病人日常生活添加',
+				title : '添加车辆',
 				area : [ '450px', '335px' ],
 				shade : 0.4,
 				content : $('#add-blogUser'),
@@ -370,6 +360,18 @@
 			});
 		});
 		
+		
+		//监听指定开关
+  form.on('switch(switchTest)', function(data){
+    var msg = (this.checked ? 'true' : 'false');
+    $("#status").val(msg);
+  });
+  
+  //监听指定开关
+  form.on('switch(fswitchTest)', function(data){
+    var msg = (this.checked ? 'true' : 'false');
+    $("#fstatus").val(msg);
+  });
 		
 	/* 动态加载用户角色 */
 	$(function() {

@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import model.TAdminUser;
+import model.VAdminru;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -32,7 +33,7 @@ public class LoginController {
 			Model model) throws IOException {
 		
 		UserLoginDAO ado = new UserLoginDAOImpl();
-		TAdminUser user = ado.chaxunadmini(userid, userpwd);
+		VAdminru user = ado.chaxunadmini(userid, userpwd);
 		// 閸ョ偘绱秊son鐎涙顑佹稉锟�		response.setCharacterEncoding("utf-8");
 		response.setContentType("application/json");
 		PrintWriter out = response.getWriter();

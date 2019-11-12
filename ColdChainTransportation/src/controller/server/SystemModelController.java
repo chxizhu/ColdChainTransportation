@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import model.TAdminUser;
+import model.VAdminru;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -69,7 +70,7 @@ public class SystemModelController {
 			Model model) throws IOException{
 		 
 		HttpSession session = request.getSession();
-		TAdminUser loginUser = (TAdminUser)session.getAttribute("loginUser");
+		VAdminru loginUser = (VAdminru)session.getAttribute("loginUser");
 		
 		SystemModelDAO smdao = new SystemModelDAOImpl();
 		List list = smdao.getSystemModelByRole(loginUser.getRoleid());

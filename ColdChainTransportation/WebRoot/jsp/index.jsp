@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@page isELIgnored="false" %>
 <!doctype html>
 <html lang="en">
 	<head>
@@ -8,6 +10,7 @@
 		<meta name="renderer" content="webkit|ie-comp|ie-stand">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+		<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
 		<link rel="stylesheet" href="../css/font.css">
 		<link rel="stylesheet" href="../css/index.css">
 		<link rel="stylesheet" href="../layui/css/layui.css" />
@@ -22,26 +25,38 @@
 	</head>
 	<body>
 		<!-- 顶部开始 -->
-		<div class="container">
-			<div class="logo">
-				<a href="../html/index.jsp">冷链运输管理平台</a>
-			</div>
-			<div class="left_open">
-				<i title="展开左侧栏" class="iconfont">&#xe699;</i>
-			</div>
-			<ul class="layui-nav left fast-add" lay-filter=""></ul>
-			<ul class="layui-nav right" lay-filter="">
-				<li class="layui-nav-item">
-					<a href="javascript:;"><span id="userrole"></span></a>
-					<dl class="layui-nav-child">
-						<dd>
-							<a id="loginout" class="loginout" href="javascript:">退出系统</a>
-						</dd>
-					</dl>
-				</li>
-			</ul>
+	<div class="container" id="layerDemo">
+		<div class="logo">
+			<a href="index.html">冷链运输管理平台</a>
 		</div>
-		<!-- 顶部结束 -->
+		<!-- 图标展开左侧栏开始 -->
+		<div class="left_open">
+			<!--<i title="展开左侧栏" class="iconfont">&#xe699;</i>-->
+			<i title="展开左侧栏" class="layui-icon layui-icon-shrink-right"></i>
+
+		</div>		
+		<!-- 新增结束 -->
+		<!-- '管理员'及 '前台首页'开始 -->
+		<ul class="layui-nav right" lay-filter="">
+		
+		<li class="layui-nav-item to-index">				
+				<a href="javascript:;">用户角色：${loginUser.name }</a>
+			</li>			
+			<li class="layui-nav-item">
+				<a href="javascript:;">${loginUser.username }</a>				
+				<dl class="layui-nav-child">
+					<!-- 二级菜单 -->
+					<dd>
+						<a onclick="WeAdminShow('个人信息','#')">个人信息</a>
+					</dd>					
+				</dl>
+			</li>	
+			
+			<li class="layui-nav-item "><button data-method="confirmTrans"
+						class="layui-btn layui-btn-danger"">退出</button></li>
+		</ul>
+	</div>
+	<!-- 顶部结束 -->
 		
 		<!-- 中部开始 -->
 		<!-- 左侧菜单开始 -->
@@ -80,5 +95,31 @@
 		<script type="text/javascript" src="../layui/layui.all.js" charset="utf-8"></script>
 		<script type="text/javascript" src="../js/jquery-3.3.1.js" ></script>
 		<script type="text/javascript" src="../js/admin.js" ></script>
+		
+		<script type="text/javascript">
+		layui.use('layer', function() { //独立版的layer无需执行这一句
+			var $ = layui.jquery, layer = layui.layer; //独立版的layer无需执行这一句
+			//触发事件
+			var active = {
+				confirmTrans : function() {
+					//配置一个透明的询问框
+					layer.msg('确定要退出嘛？', {
+						time : 20000, //20s后自动关闭
+						btn : [ '确定', '取消' ],
+						yes : function(index, layero) { // 默认的是 按钮一
+							sessionStorage.clear()
+							window.location.reload()
+							window.location.href = "login.jsp"
+						}
+					});
+				}
+			};
+
+			$('#layerDemo .layui-btn').on('click', function() {
+				var othis = $(this), method = othis.data('method');
+				active[method] ? active[method].call(this, othis) : '';
+			});
+		});
+	</script>
 	</body>
 </html>

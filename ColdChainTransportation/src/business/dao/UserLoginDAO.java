@@ -1,11 +1,11 @@
 package business.dao;
 
-import model.TAdminUser;
+import model.VAdminru;
 
 
 public interface UserLoginDAO {
 	/**
 	 *µÇÂ¼²éÑ¯;
 	 */
-	public  TAdminUser chaxunadmini(String userid,String userpwd); 
+	public  VAdminru chaxunadmini(String userid,String userpwd); 
 }
