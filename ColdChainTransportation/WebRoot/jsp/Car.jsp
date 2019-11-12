@@ -127,7 +127,7 @@
               	 车牌号：
               </label>
               <div class="layui-input-inline">
-                  <input type="text" id="userid" name="userid" 
+                  <input type="text" id="carnum" name="carnum" 
                   autocomplete="off" class="layui-input">
               </div>             
           </div>
@@ -150,7 +150,7 @@
                                                        备注：
               </label>
               <div class="layui-input-inline">
-                  <textarea style = "width:230px;height:180px;margin-top:10px;" name="description"  id="description"  placeholder="请输入内容" class="layui-textarea"></textarea>
+                  <textarea style = "width:230px;height:180px;margin-top:10px;" name="remarks"  id="remarks"  placeholder="请输入内容" class="layui-textarea"></textarea>
               </div>              
           </div>
           
@@ -187,7 +187,7 @@
 		table.render({
 			elem : '#blogUser',
 			id:'blogUserid',
-			url : '../AdminUser/select',
+			url : '../Car/select',
 			title : '添加车辆',
 			height: "full-160",
 			skin : 'line',
@@ -199,25 +199,21 @@
 					align : 'center',
 					width : 80
 				},{
-					field : 'userid',
-					title : '账号',
+					field : 'carnum',
+					title : '车牌号',
 					align : 'center'
 				}, {
-					field : 'username',
-					title : '姓名',
+					field : 'status',
+					title : '状态',
 					align : 'center'
 				}, {
-					field : 'sex',
+					field : 'fanstatuds',
 					align : 'center',
-					title : '性别',
+					title : '风扇状态',
 				}, {
-					field : 'phone',
+					field : 'remarks',
 					align : 'center',
-					title : '电话'
-				},{
-					title : '角色',
-					field : 'name',
-					align : 'center',
+					title : '备注'
 				},{
 					title : '操作',
 					toolbar : '#barDemo',
@@ -291,10 +287,8 @@
 		
 		/* 添加一个网站用户 */
 		$("#addartType").click(function(){
-			$("#userid").val("");
-			$("#username").val("");
-			$("#userpwd").val("");
-			$("#phone").val("");
+			$("#carnum").val("");
+			$("#remarks").val("");
 			
 			layer.open({
 				type : 1,
@@ -304,33 +298,22 @@
 				content : $('#add-blogUser'),
 				btn : [ '保存', '返回' ],
 				yes : function() {
-					var userid = $("#userid").val().trim();
-					var username = $("#username").val().trim();
-					var userpwd = $("#userpwd").val().trim();
-					var phone = $("#phone").val().trim();
-					var sex = $('input:radio:checked').val();
-					var adminrole = $("#adminrole").val().trim();
+					var carnum = $("#carnum").val().trim();
+					var remarks=$("#remarks").val().trim();
+					var status = $("#status").val().trim();
+					var fanstatuds = $("#fstatus").val().trim();
 					
-
-					if(userid == "") {
-						layer.tips('不能为空', '#userid');
+					if(carnum == "") {
+						layer.tips('不能为空', '#carnum');
 						return;
 					} 
-					if(username==""){
-						layer.tips('不能为空', '#username');
+					if(remarks==""){
+						layer.tips('不能为空', '#remarks');
 						return;
 					}
-					if(userpwd == "") {
-						layer.tips('不能为空', '#userpwd');
-						return;
-					} 
-					if(phone == "") {
-						layer.tips('不能为空', '#phone');
-						return;
-					} 
 					$.ajax({
 						type : 'get',
-						url : '../AdminUser/add?userid='+userid+'&username='+username+'&userpwd='+userpwd+'&adminrole='+adminrole+'&phone='+phone+'&sex='+sex,
+						url : '../Car/add?carnum='+carnum+'&remarks='+remarks+'&status='+status+'&fanstatuds='+fanstatuds,
 						datatype : 'json',
 						success : function(data) {
 							if (data.code == "0") {
@@ -433,7 +416,7 @@
 					}, function(){
 						$.ajax({
 			        		type: 'get',
-			        		url: "../AdminUser/delect?userid=" + data.userid,
+			        		url: "../Car/delect?carid=" + data.carid,
 			        		dataType: 'json',
 			        		success:function(data){
 			        			if(data.code == 0){
