@@ -15,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import util.Expression;
 import util.ReturnData;
 import business.dao.AdminUserModelDAO;
 import business.dao.CarModelDAO;
@@ -38,6 +39,53 @@ public class CarController {
 		
 		CarModelDAO adao = new CarModelDAOImpl();
 		List<TCar> List = adao.seletCar(page, limit);
+		// 回传json字符串
+		response.setCharacterEncoding("utf-8");
+		response.setContentType("application/json");
+		PrintWriter out = response.getWriter();
+		ReturnData td = new ReturnData();
+		if (List != null) {
+			td.code = ReturnData.SUCCESS;
+			td.msg = "查询成功";
+			td.data = List;
+			td.count = 5;
+		} else {
+			td.code = ReturnData.ERROR;
+			td.msg = "查询失败";
+		}
+		out.write(JSON.toJSONString(td));
+		out.flush();
+		out.close();
+
+	}
+	
+	/**
+	 * 绯荤粺鐧诲綍鎿嶄綔涓氬姟鎺у埗绫?
+	 * @author mhselect
+	 *
+	 */
+	@RequestMapping(value = "/mhselect")
+	public void getuserrolemanager(String carnum, String status,String fanstatuds,
+			int page, int limit,
+			HttpServletRequest request, HttpServletResponse response,
+			Model model) throws IOException {
+		
+		Expression exp = new Expression();
+		
+		if (carnum != null && !carnum.equals("")) {
+			exp.andLike("carnum", carnum, String.class);
+		}
+		System.out.println(carnum);
+		if (status != null && !status.equals("")) {
+			exp.andLike("status", status, String.class);
+		}
+		System.out.println(status);
+		if (fanstatuds != null && !fanstatuds.equals("")) {
+			exp.andLike("fanstatuds", fanstatuds, String.class);
+		}
+		
+		CarModelDAO adao = new CarModelDAOImpl();
+		List<TCar> List = adao.selectByLike(exp.toString(),page,limit);
 		// 回传json字符串
 		response.setCharacterEncoding("utf-8");
 		response.setContentType("application/json");

@@ -8,7 +8,9 @@
 	<meta name="renderer" content="webkit">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-	<link rel="stylesheet" href="../layui/css/layui.css" media="all">
+		<link rel="stylesheet" href="../css/font.css">
+		<link rel="stylesheet" href="../css/index.css">
+		<link rel="stylesheet" href="../layui/css/layui.css" />
 	<style>
 		.blogUser-con .layui-table-view {
 			border: none;
@@ -106,12 +108,50 @@
 	<div class="blogUser-con">
 		<!-- 条件筛选框Start -->
 		<blockquote class="layui-elem-quote not_border_left">
-			<form class="layui-form" action="">		   
+			<form class="layui-form" action="">	
+			    <div class="layui-form-item">
+              <label for="phone" class="layui-form-label">
+              	 车牌号：
+              </label>
+              <div class="layui-input-inline">
+                  <input type="text" id="carnumx" name="carnumx" 
+                  autocomplete="off" class="layui-input">
+              </div>             
+          </div>
+          
+          <div class="layui-form-item" style = "margin-left:270px;margin-top:-52px;position: absolute;">
+              <label for="phone" class="layui-form-label">
+              	 状态：
+              </label>
+              <div class="layui-input-inline">
+                  <select name="statusx" id="statusx" lay-verify="required" lay-search="">
+          <option value="">直接选择或搜索选择</option>
+           <option value="1">True</option>
+          <option value="0">False</option>
+         </select>
+              </div>             
+          </div>
+          <div class="layui-form-item" style = "margin-left:570px;margin-top:-52px;position: absolute;">
+              <label for="phone" class="layui-form-label">
+              	 风扇状态：
+              </label>
+              <div class="layui-input-inline">
+                  <select name="fanstatudsx" id="fanstatudsx" lay-verify="required" lay-search="">
+          <option value="">直接选择或搜索选择</option>
+          <option value="1">True</option>
+          <option value="0">False</option>
+         </select>
+              </div>             
+           </div>
+			      <div class="layui-inline" style = "margin-left:900px;margin-top:-52px;position: absolute;">
+	     	   		<button id="btnselfrontinfo" type="button" class="layui-btn layui-bg-blue">查询</button>
+			    </div>	 
+			         <div class="layui-inline" style = "margin-left:970px;margin-top:-52px;position: absolute;">  
 				<button type="button" class="layui-btn layui-bg-blue" id="addartType" lay-event="addartType" lay-filter="addartType" style="margin-left: 10px;">添加车辆</button>
+				</div>
 			</form>
-		</blockquote>
+		   </blockquote>
 		<!-- 条件筛选框End -->
-
 		<table class="layui-hide" name="blogUser" id="blogUser" lay-filter="blogUser"></table>
 
 		<script type="text/html" id="barDemo">
@@ -177,7 +217,61 @@
 	<script src="../js/jquery-3.3.1.js" charset="utf-8"></script>
 	<script src="../layui/layui.js" charset="utf-8"></script>
 	<script>
-	layui.use([ 'table', 'form', 'layer', 'laydate', 'laytpl', 'element' ], function() {
+/* 	layui.use([ 'table', 'form', 'layer', 'laydate', 'laytpl', 'element' ], function() {
+		var table = layui.table, form = layui.form, 
+			layer = layui.layer, $ = layui.jquery,
+			laydate = layui.laydate, laytpl = layui.laytpl,
+			element = layui.element;
+	
+		/*加载表格*/
+		/*
+		table.render({
+			elem : '#blogUser',
+			id:'blogUserid',
+			url : '../Car/select',
+		    page: true,
+			title : '添加车辆',
+			height: "full-160",
+			skin : 'line',
+			even : true,
+			cols : [ 
+			     [ {
+					type : 'numbers',
+					title : '序号',
+					align : 'center',
+					width : 80
+				},{
+					field : 'carnum',
+					title : '车牌号',
+					align : 'center'
+				}, {
+					field : 'status',
+					title : '状态',
+					align : 'center'
+				}, {
+					field : 'fanstatuds',
+					align : 'center',
+					title : '风扇状态',
+				}, {
+					field : 'remarks',
+					align : 'center',
+					title : '备注'
+				},{
+					title : '操作',
+					toolbar : '#barDemo',
+					align : 'center'
+				} ] 
+			 ],
+			 page: {
+					layout: ['prev', 'page', 'next', 'skip', 'count', 'limit'],
+					groups: 5,
+					limit: 10,
+					limits: [10, 20, 30, 40, 50],
+					theme: '#1E9FFF',					
+			 },
+		}); */
+		
+		layui.use([ 'table', 'form', 'layer', 'laydate', 'laytpl', 'element' ], function() {
 		var table = layui.table, form = layui.form, 
 			layer = layui.layer, $ = layui.jquery,
 			laydate = layui.laydate, laytpl = layui.laytpl,
@@ -188,7 +282,7 @@
 			elem : '#blogUser',
 			id:'blogUserid',
 			url : '../Car/select',
-			title : '添加车辆',
+			title : '博主用户数据表',
 			height: "full-160",
 			skin : 'line',
 			even : true,
@@ -231,10 +325,14 @@
 		
 		/* 点击查询对网站用户进行筛选 */
 		$("#btnselfrontinfo").click(function(){
-			var useridornickname=$("#userName").val().trim();
+			var carnum = $("#carnumx").val().trim();
+			var status = $("#statusx").val().trim();
+			var fanstatuds = $("#fanstatudsx").val().trim();
+			var param = '?carnum=' + carnum + '&status=' + status + '&fanstatuds=' + fanstatuds;
+			
 			table.render({
 				elem : '#blogUser',
-				url : '../systemmodel/roleListByName?userName='+useridornickname,
+				url : '../Car/mhselect' + param,
 				title : '添加车辆',
 				height: "full-160",
 				skin : 'line',
@@ -242,34 +340,26 @@
 				cols : [ 
 				       [ {
 					type : 'numbers',
-					title : '病人',
+					title : '序号',
 					align : 'center',
 					width : 80
-				}, {
-					field : 'roleid',
-					title : '饮食与营养型态',
+				},{
+					field : 'carnum',
+					title : '车牌号',
 					align : 'center'
 				}, {
-					field : 'rolename',
-					align : 'center',
-					title : '排泄型态',
-				}, {
-					field : 'authorityId',
-					align : 'center',
-					title : '休息与睡眠型态'
-				},{
-					title : '日常生活活动',
-					toolbar : '#barDemo',
+					field : 'status',
+					title : '状态',
 					align : 'center'
-				},{
-					field : 'authorityId',
+				}, {
+					field : 'fanstatuds',
 					align : 'center',
-					title : '自理能力'
-				},{
-					field : 'authorityId',
+					title : '风扇状态',
+				}, {
+					field : 'remarks',
 					align : 'center',
-					title : '个人嗜好'
-				} ,{
+					title : '备注'
+				},{
 					title : '操作',
 					toolbar : '#barDemo',
 					align : 'center'

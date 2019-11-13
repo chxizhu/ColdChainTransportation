@@ -23,4 +23,11 @@ public interface CarModelDAO {
 	 * @return 成功返回0失败返回1
 	 */
 	public int addCar(TCar user);
+	/**
+	 * 添加车辆
+	 * @param TCar 用户对象
+	 * @return 成功返回0失败返回1
+	 */
+	public List<TCar> selectByLike(String wherecondition,
+			int page, int limit);
 }

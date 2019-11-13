@@ -35,4 +35,21 @@ public class CarModelDAOImpl implements CarModelDAO {
 			return 1;	
 	}
 
+	@Override
+	public List<TCar> selectByLike(String wherecondition, int page, int limit) {
+		String hql = "from TCar ";
+		if(wherecondition!=null && !wherecondition.equals("")){
+			hql += wherecondition;
+		}
+		List list = bdao.selectByPage(hql, page, limit);
+		return list;
+	}
+	
+//	@Override
+//	public List<TCar> selectByLike(String chaxun, int page, int limit) {
+//		String hql = "from TCar where carnum like ?  or remarks like ?  order by carid desc";
+//		Object[] para = {"%"+ chaxun + "%","%"+ chaxun + "%"};
+//		return bdao.selectByPage(hql, para, page, limit);
+//	}
+
 }
