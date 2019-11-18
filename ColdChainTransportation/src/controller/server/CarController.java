@@ -29,16 +29,19 @@ import com.alibaba.fastjson.JSON;
 public class CarController {
 	/**
 	 * 绯荤粺鐧诲綍鎿嶄綔涓氬姟鎺у埗绫?
-	 * @author select
+	 * @author select 
 	 *
-	 */
-	@RequestMapping(value = "/select")
+	 */  
+		
+		@RequestMapping(value = "/select")
 	public void getuserrolemanagerlist(String str, int page, int limit,
 			HttpServletRequest request, HttpServletResponse response,
 			Model model) throws IOException {
-		
+			
 		CarModelDAO adao = new CarModelDAOImpl();
 		List<TCar> List = adao.seletCar(page, limit);
+		
+		int size = adao.getSystemCarAmount();
 		// 回传json字符串
 		response.setCharacterEncoding("utf-8");
 		response.setContentType("application/json");
@@ -48,7 +51,7 @@ public class CarController {
 			td.code = ReturnData.SUCCESS;
 			td.msg = "查询成功";
 			td.data = List;
-			td.count = 5;
+			td.count = size;
 		} else {
 			td.code = ReturnData.ERROR;
 			td.msg = "查询失败";

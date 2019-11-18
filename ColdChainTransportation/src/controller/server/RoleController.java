@@ -69,6 +69,9 @@ public class RoleController {
 		
 		RoleModelDAO pdao = new RoleModelDAOImpl();
 		List<TAdminRole> List = pdao.seletrole(page, limit);
+		
+		int size = pdao.getSystemRoleAmount();
+		
 		// 回传json字符串
 		response.setCharacterEncoding("utf-8");
 		response.setContentType("application/json");
@@ -78,6 +81,7 @@ public class RoleController {
 			td.code = ReturnData.SUCCESS;
 			td.msg = "查询成功";
 			td.data = List;
+			td.count = size;
 		} else {
 			td.code = ReturnData.ERROR;
 			td.msg = "查询失败";

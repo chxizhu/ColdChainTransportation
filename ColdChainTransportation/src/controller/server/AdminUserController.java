@@ -8,15 +8,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import model.TAdminUser;
+import model.TCar;
 import model.VAdminru;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import util.Expression;
 import util.ReturnData;
 import business.dao.AdminUserModelDAO;
+import business.dao.CarModelDAO;
 import business.impl.AdminUserModelDAOImpl;
+import business.impl.CarModelDAOImpl;
 
 import com.alibaba.fastjson.JSON;
 
@@ -76,6 +80,53 @@ public class AdminUserController {
 		
 		AdminUserModelDAO adao = new AdminUserModelDAOImpl();
 		List<VAdminru> List = adao.seletUsers(page, limit);
+		
+		int size = adao.getSystemUserAmount();
+		// 回传json字符串
+		response.setCharacterEncoding("utf-8");
+		response.setContentType("application/json");
+		PrintWriter out = response.getWriter();
+		ReturnData td = new ReturnData();
+		if (List != null) {
+			td.code = ReturnData.SUCCESS;
+			td.msg = "查询成功";
+			td.data = List;
+			td.count = size;
+		} else {
+			td.code = ReturnData.ERROR;
+			td.msg = "查询失败";
+		}
+		out.write(JSON.toJSONString(td));
+		out.flush();
+		out.close();
+
+	}
+	
+	/**
+	 * 绯荤粺鐧诲綍鎿嶄綔涓氬姟鎺у埗绫?
+	 * @author mhselect
+	 *
+	 */
+	@RequestMapping(value = "/mhselect")
+	public void getuserrolemanager(String name, String sex,String role,
+			int page, int limit,
+			HttpServletRequest request, HttpServletResponse response,
+			Model model) throws IOException {
+		
+		Expression exp = new Expression();
+		
+		if (name != null && !name.equals("")) {
+			exp.andLike("username", name, String.class);
+		}
+		if (sex != null && !sex.equals("")) {
+			exp.andLike("sex", sex, String.class);
+		}
+		if (role != null && !role.equals("")) {
+			exp.andLike("name", role, String.class);
+		}
+		
+		AdminUserModelDAO adao = new AdminUserModelDAOImpl();
+		List<VAdminru> List = adao.selectByLike(exp.toString(),page,limit);
 		// 回传json字符串
 		response.setCharacterEncoding("utf-8");
 		response.setContentType("application/json");
@@ -94,6 +145,7 @@ public class AdminUserController {
 		out.close();
 
 	}
+	
 	
 	@RequestMapping(value = "/delect")
 	public void deletejudges(String userid, HttpServletRequest request,

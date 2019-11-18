@@ -44,6 +44,12 @@ public class CarModelDAOImpl implements CarModelDAO {
 		List list = bdao.selectByPage(hql, page, limit);
 		return list;
 	}
+
+	@Override
+	public int getSystemCarAmount() {
+		String hql = "select count(*) from TCar";
+		return bdao.selectValue(hql);
+	}
 	
 //	@Override
 //	public List<TCar> selectByLike(String chaxun, int page, int limit) {

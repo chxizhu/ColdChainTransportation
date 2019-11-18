@@ -45,4 +45,11 @@ public class RoleModelDAOImpl implements RoleModelDAO {
 		return bdao.selectByPage(hql, page, limit);
 	}
 
+
+	@Override
+	public int getSystemRoleAmount() {
+		String hql = "select count(*) from TAdminRole";
+		return bdao.selectValue(hql);
+	}
+
 }

@@ -30,4 +30,8 @@ public interface CarModelDAO {
 	 */
 	public List<TCar> selectByLike(String wherecondition,
 			int page, int limit);
+	/**
+	 *²éÑ¯ÊıÁ¿;
+	 */
+	public int getSystemCarAmount();
 }

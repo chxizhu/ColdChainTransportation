@@ -106,8 +106,48 @@
 	<div class="blogUser-con">
 		<!-- 条件筛选框Start -->
 		<blockquote class="layui-elem-quote not_border_left">
-			<form class="layui-form" action="">		   
+			<form class="layui-form" action="">
+			
+			<div class="layui-form-item">
+              <label for="phone" class="layui-form-label">
+              	 姓名：
+              </label>
+              <div class="layui-input-inline">
+                  <input type="text" id="adminame" name="adminame" 
+                  autocomplete="off" class="layui-input">
+              </div>             
+          </div>
+          
+          <div class="layui-form-item" style = "margin-left:270px;margin-top:-52px;position: absolute;">
+              <label for="phone" class="layui-form-label">
+              	 角色：
+              </label>
+              <div class="layui-input-inline">
+                  <select name="role" id="role" lay-verify="required" lay-search="">
+          <option value="">直接选择或搜索选择</option>
+           <option value="管理员">管理员</option>
+          <option value="值班经理">值班经理</option>
+         </select>
+              </div>             
+          </div>
+          <div class="layui-form-item" style = "margin-left:570px;margin-top:-52px;position: absolute;">
+              <label for="phone" class="layui-form-label">
+              	 性别：
+              </label>
+              <div class="layui-input-inline">
+                  <select name="adminsex" id="adminsex" lay-verify="required" lay-search="">
+          <option value="">直接选择或搜索选择</option>
+          <option value="男">男</option>
+          <option value="女">女</option>
+         </select>
+              </div>             
+           </div>
+            <div class="layui-inline" style = "margin-left:900px;margin-top:-52px;position: absolute;">
+	     	   		<button id="btnselfrontinfo" type="button" class="layui-btn layui-bg-blue">查询</button>
+			    </div>	
+			    <div class="layui-inline" style = "margin-left:970px;margin-top:-52px;position: absolute;">  		   
 				<button type="button" class="layui-btn layui-bg-blue" id="addartType" lay-event="addartType" lay-filter="addartType" style="margin-left: 10px;">添加用户</button>
+				</div>
 			</form>
 		</blockquote>
 		<!-- 条件筛选框End -->
@@ -198,7 +238,7 @@
 			elem : '#blogUser',
 			id:'blogUserid',
 			url : '../AdminUser/select',
-			title : '病人生活数据表',
+			title : '用户添加',
 			height: "full-160",
 			skin : 'line',
 			even : true,
@@ -245,49 +285,49 @@
 		
 		/* 点击查询对网站用户进行筛选 */
 		$("#btnselfrontinfo").click(function(){
-			var useridornickname=$("#userName").val().trim();
+			var name=$("#adminame").val().trim();
+			var role=$("#role").val().trim();
+			var sex=$("#adminsex").val().trim();
+			var param = '?name=' + name + '&role=' + role + '&sex=' + sex;
+			
 			table.render({
 				elem : '#blogUser',
-				url : '../systemmodel/roleListByName?userName='+useridornickname,
-				title : '病人生活数据表',
+				url : '../AdminUser/mhselect' + param,
+				title : '用户添加',
 				height: "full-160",
 				skin : 'line',
 				even : true,
 				cols : [ 
-				       [ {
+				       [{
 					type : 'numbers',
-					title : '病人',
+					title : '序号',
 					align : 'center',
 					width : 80
-				}, {
-					field : 'roleid',
-					title : '饮食与营养型态',
+				},{
+					field : 'userid',
+					title : '账号',
 					align : 'center'
 				}, {
-					field : 'rolename',
-					align : 'center',
-					title : '排泄型态',
-				}, {
-					field : 'authorityId',
-					align : 'center',
-					title : '休息与睡眠型态'
-				},{
-					title : '日常生活活动',
-					toolbar : '#barDemo',
+					field : 'username',
+					title : '姓名',
 					align : 'center'
-				},{
-					field : 'authorityId',
+				}, {
+					field : 'sex',
 					align : 'center',
-					title : '自理能力'
-				},{
-					field : 'authorityId',
+					title : '性别',
+				}, {
+					field : 'phone',
 					align : 'center',
-					title : '个人嗜好'
-				} ,{
+					title : '电话'
+				},{
+					title : '角色',
+					field : 'name',
+					align : 'center',
+				},{
 					title : '操作',
 					toolbar : '#barDemo',
 					align : 'center'
-				}] 
+				} ] 
 				 ],
 				 page: {
 					layout: ['prev', 'page', 'next', 'skip', 'count', 'limit'],
@@ -308,7 +348,7 @@
 			
 			layer.open({
 				type : 1,
-				title : '病人日常生活添加',
+				title : '用户添加',
 				area : [ '450px', '335px' ],
 				shade : 0.4,
 				content : $('#add-blogUser'),

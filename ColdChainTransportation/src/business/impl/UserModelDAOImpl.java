@@ -35,4 +35,10 @@ public class UserModelDAOImpl implements UserModelDAO {
 			return 1;	
 	}
 
+	@Override
+	public int getSystemsijiAmount() {
+		String hql = "select count(*) from TUser";
+		return bdao.selectValue(hql);
+	}
+
 }

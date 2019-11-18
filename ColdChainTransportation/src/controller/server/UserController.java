@@ -38,6 +38,8 @@ public class UserController {
 		
 		UserModelDAO adao = new UserModelDAOImpl();
 		List<TUser> List = adao.seletUsers(page, limit);
+		
+		int size = adao.getSystemsijiAmount();
 		// 回传json字符串
 		response.setCharacterEncoding("utf-8");
 		response.setContentType("application/json");
@@ -47,6 +49,7 @@ public class UserController {
 			td.code = ReturnData.SUCCESS;
 			td.msg = "查询成功";
 			td.data = List;
+			td.count = size;
 		} else {
 			td.code = ReturnData.ERROR;
 			td.msg = "查询失败";

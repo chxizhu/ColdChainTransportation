@@ -157,8 +157,48 @@
 	<div class="blogUser-con">
 		<!-- 条件筛选框Start -->
 		<blockquote class="layui-elem-quote not_border_left">
-			<form class="layui-form" action="">		   
+			<form class="layui-form" action="">		
+			 
+			  <div class="layui-form-item">
+              <label for="phone" class="layui-form-label">
+              	 姓名：
+              </label>
+              <div class="layui-input-inline">
+                  <input type="text" id="carnumx" name="carnumx" 
+                  autocomplete="off" class="layui-input">
+              </div>             
+          </div>
+          
+          <div class="layui-form-item" style = "margin-left:270px;margin-top:-52px;position: absolute;">
+              <label for="phone" class="layui-form-label">
+              	 状态：
+              </label>
+              <div class="layui-input-inline">
+                  <select name="statusx" id="statusx" lay-verify="required" lay-search="">
+          <option value="">直接选择或搜索选择</option>
+           <option value="1">True</option>
+          <option value="0">False</option>
+         </select>
+              </div>             
+          </div>
+          <div class="layui-form-item" style = "margin-left:570px;margin-top:-52px;position: absolute;">
+              <label for="phone" class="layui-form-label">
+              	 性别：
+              </label>
+              <div class="layui-input-inline">
+                  <select name="fanstatudsx" id="fanstatudsx" lay-verify="required" lay-search="">
+          <option value="">直接选择或搜索选择</option>
+          <option value="男">男</option>
+          <option value="女">女</option>
+         </select>
+              </div>             
+           </div>
+           <div class="layui-inline" style = "margin-left:900px;margin-top:-52px;position: absolute;">
+	     	   		<button id="btnselfrontinfo" type="button" class="layui-btn layui-bg-blue">查询</button>
+			    </div>	
+			    <div class="layui-inline" style = "margin-left:970px;margin-top:-52px;position: absolute;">  
 				<button type="button" class="layui-btn layui-bg-blue" id="addartType" lay-event="addartType" lay-filter="addartType" style="margin-left: 10px;">添加司机</button>
+				</div>
 			</form>
 		</blockquote>
 		<!-- 条件筛选框End -->

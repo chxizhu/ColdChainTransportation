@@ -28,4 +28,8 @@ public interface RoleModelDAO {
 	 *查询;
 	 */
 	public List<TAdminRole> seletrole(int page,int limit);
+	/**
+	 *查询数量;
+	 */
+	public int getSystemRoleAmount();
 }

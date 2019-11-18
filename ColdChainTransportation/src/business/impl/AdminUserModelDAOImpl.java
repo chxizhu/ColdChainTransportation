@@ -35,4 +35,21 @@ public class AdminUserModelDAOImpl implements AdminUserModelDAO {
 		return bdao.selectByPage(hql, page, limit);
 	}
 
+	@Override
+	public int getSystemUserAmount() {
+		String hql = "select count(*) from VAdminru";
+		return bdao.selectValue(hql);
+	}
+
+	@Override
+	public List<VAdminru> selectByLike(String wherecondition, int page,
+			int limit) {
+		String hql = "from VAdminru ";
+		if(wherecondition!=null && !wherecondition.equals("")){
+			hql += wherecondition;
+		}
+		List list = bdao.selectByPage(hql, page, limit);
+		return list;
+	}
+
 }

@@ -23,4 +23,8 @@ public interface UserModelDAO {
 	 * @return 成功返回0失败返回1
 	 */
 	public int addUsers(TUser user);
+	/**
+	 *查询数量;
+	 */
+	public int getSystemsijiAmount();
 }
