@@ -164,7 +164,7 @@
               	 姓名：
               </label>
               <div class="layui-input-inline">
-                  <input type="text" id="carnumx" name="carnumx" 
+                  <input type="text" id="sijiname" name="sijiname" 
                   autocomplete="off" class="layui-input">
               </div>             
           </div>
@@ -174,7 +174,7 @@
               	 状态：
               </label>
               <div class="layui-input-inline">
-                  <select name="statusx" id="statusx" lay-verify="required" lay-search="">
+                  <select name="sijistatus" id="sijistatus" lay-verify="required" lay-search="">
           <option value="">直接选择或搜索选择</option>
            <option value="1">True</option>
           <option value="0">False</option>
@@ -186,7 +186,7 @@
               	 性别：
               </label>
               <div class="layui-input-inline">
-                  <select name="fanstatudsx" id="fanstatudsx" lay-verify="required" lay-search="">
+                  <select name="sijisex" id="sijisex" lay-verify="required" lay-search="">
           <option value="">直接选择或搜索选择</option>
           <option value="男">男</option>
           <option value="女">女</option>
@@ -339,45 +339,45 @@
 		
 		/* 点击查询对网站用户进行筛选 */
 		$("#btnselfrontinfo").click(function(){
-			var useridornickname=$("#userName").val().trim();
+			var username=$("#sijiname").val().trim();
+			var status=$("#sijistatus").val().trim();
+			var sex=$("#sijisex").val().trim();
+			var param = '?username=' + username + '&status=' + status + '&sex=' + sex;
+			
 			table.render({
 				elem : '#blogUser',
-				url : '../systemmodel/roleListByName?userName='+useridornickname,
+				url : '../User/mhselect' + param,
 				title : '添加司机',
 				height: "full-160",
 				skin : 'line',
 				even : true,
 				cols : [ 
-				       [ {
+				       [  {
 					type : 'numbers',
-					title : '病人',
+					title : '序号',
 					align : 'center',
 					width : 80
-				}, {
-					field : 'roleid',
-					title : '饮食与营养型态',
+				},{
+					field : 'userid',
+					title : '账号',
 					align : 'center'
 				}, {
-					field : 'rolename',
-					align : 'center',
-					title : '排泄型态',
-				}, {
-					field : 'authorityId',
-					align : 'center',
-					title : '休息与睡眠型态'
-				},{
-					title : '日常生活活动',
-					toolbar : '#barDemo',
+					field : 'userName',
+					title : '姓名',
 					align : 'center'
-				},{
-					field : 'authorityId',
+				}, {
+					field : 'sex',
 					align : 'center',
-					title : '自理能力'
-				},{
-					field : 'authorityId',
+					title : '性别',
+				}, {
+					field : 'tel',
 					align : 'center',
-					title : '个人嗜好'
-				} ,{
+					title : '电话'
+				}, {
+					field : 'status',
+					align : 'center',
+					title : '状态',
+				}, {
 					title : '操作',
 					toolbar : '#barDemo',
 					align : 'center'

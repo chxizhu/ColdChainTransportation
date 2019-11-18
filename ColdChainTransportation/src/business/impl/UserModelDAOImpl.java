@@ -41,4 +41,14 @@ public class UserModelDAOImpl implements UserModelDAO {
 		return bdao.selectValue(hql);
 	}
 
+	@Override
+	public List<TUser> selectByLike(String wherecondition, int page, int limit) {
+		String hql = "from TUser ";
+		if(wherecondition!=null && !wherecondition.equals("")){
+			hql += wherecondition;
+		}
+		List list = bdao.selectByPage(hql, page, limit);
+		return list;
+	}
+
 }

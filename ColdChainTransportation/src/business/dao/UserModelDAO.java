@@ -3,6 +3,7 @@ package business.dao;
 import java.util.List;
 
 import model.TAdminUser;
+import model.TCar;
 import model.TUser;
 
 public interface UserModelDAO {
@@ -27,4 +28,11 @@ public interface UserModelDAO {
 	 *查询数量;
 	 */
 	public int getSystemsijiAmount();
+	/**
+	 * 添加车辆
+	 * @param TUser 用户对象
+	 * @return 成功返回0失败返回1
+	 */
+	public List<TUser> selectByLike(String wherecondition,
+			int page, int limit);
 }
