@@ -90,14 +90,25 @@
 		<table class="layui-table">
 		    <tbody>
 		      <tr>
-		        <td class="tdbck">ID</td>
-		        <td><span id="txtclaid"></span></td>
+		        <td class="tdbck">账号</td>
+		        <td><span id="ckuserid"></span></td>
 		      </tr>
 		      <tr>
-		        <td class="tdbck">角色名称</td>
-		        <td><span id="txtadminuserrealname"></span></td>
+		        <td class="tdbck">姓名</td>
+		        <td><span id="ckusername"></span></td>
 		      </tr>
-		     
+		      <tr>
+		        <td class="tdbck">角色</td>
+		        <td><span id="ckname"></span></td>
+		      </tr>
+		      <tr>
+		        <td class="tdbck">性别</td>
+		        <td><span id="cksex"></span></td>
+		      </tr>
+		     <tr>
+		        <td class="tdbck">电话</td>
+		        <td><span id="ckphone"></span></td>
+		      </tr>
 		    </tbody>
 		  </table>
 	</div>
@@ -155,6 +166,7 @@
 		<table class="layui-hide" name="blogUser" id="blogUser" lay-filter="blogUser"></table>
 
 		<script type="text/html" id="barDemo">
+			<a class="layui-btn layui-btn-xs" lay-event="seluser">查看</a>
 			<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
 		</script>
 
@@ -439,10 +451,11 @@
 		//表格工具栏事件 
 		table.on('tool(blogUser)', function(obj) {
 			var data = obj.data;
-			$("#txtclaid").text(data.roleid);
-			$("#txtadminuserrealname").text(data.rolename);
-			$("#txtadminuserusertype").text(data.authorityId);
-			
+			$("#ckuserid").text(data.userid);
+			$("#ckusername").text(data.username);
+			$("#ckphone").text(data.phone);
+			$("#cksex").text(data.sex);
+			$("#ckname").text(data.name);
 			
 			switch (obj.event) {
 				case 'seluser':

@@ -92,14 +92,21 @@
 		<table class="layui-table">
 		    <tbody>
 		      <tr>
-		        <td class="tdbck">ID</td>
-		        <td><span id="txtclaid"></span></td>
+		        <td class="tdbck">车牌号</td>
+		        <td><span id="ckcarnum"></span></td>
 		      </tr>
 		      <tr>
-		        <td class="tdbck">角色名称</td>
-		        <td><span id="txtadminuserrealname"></span></td>
+		        <td class="tdbck">状态</td>
+		        <td><span id="ckstatus"></span></td>
 		      </tr>
-		     
+		       <tr>
+		        <td class="tdbck">风扇状态</td>
+		        <td><span id="ckfanstatuds"></span></td>
+		      </tr>
+		      <tr>
+		        <td class="tdbck">备注</td>
+		        <td><span id="ckremarks"></span></td>
+		      </tr>
 		    </tbody>
 		  </table>
 	</div>
@@ -155,6 +162,7 @@
 		<table class="layui-hide" name="blogUser" id="blogUser" lay-filter="blogUser"></table>
 
 		<script type="text/html" id="barDemo">
+			<a class="layui-btn layui-btn-xs" lay-event="seluser">查看</a>
 			<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
 		</script>
 
@@ -474,9 +482,10 @@
 		//表格工具栏事件 
 		table.on('tool(blogUser)', function(obj) {
 			var data = obj.data;
-			$("#txtclaid").text(data.roleid);
-			$("#txtadminuserrealname").text(data.rolename);
-			$("#txtadminuserusertype").text(data.authorityId);
+			$("#ckcarnum").text(data.carnum);
+			$("#ckstatus").text(data.status);
+			$("#ckfanstatuds").text(data.fanstatuds);
+			$("#ckremarks").text(data.remarks);
 			
 			
 			switch (obj.event) {

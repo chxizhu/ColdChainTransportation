@@ -90,14 +90,17 @@
 		<table class="layui-table">
 		    <tbody>
 		      <tr>
-		        <td class="tdbck">ID</td>
-		        <td><span id="txtclaid"></span></td>
+		        <td class="tdbck">账号</td>
+		        <td><span id="ckid"></span></td>
 		      </tr>
 		      <tr>
 		        <td class="tdbck">角色名称</td>
-		        <td><span id="txtadminuserrealname"></span></td>
+		        <td><span id="ckname"></span></td>
 		      </tr>
-		     
+		     <tr>
+		        <td class="tdbck">描述</td>
+		        <td><span id="ckdescription"></span></td>
+		      </tr>
 		    </tbody>
 		  </table>
 	</div>
@@ -115,6 +118,7 @@
 		<table class="layui-hide" name="blogUser" id="blogUser" lay-filter="blogUser"></table>
 
 		<script type="text/html" id="barDemo">
+			<a class="layui-btn layui-btn-xs" lay-event="seluser">查看</a>
 			<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
 		</script>
 		<!-- 用户信息添加Start -->
@@ -336,16 +340,16 @@
 		//表格工具栏事件 
 		table.on('tool(blogUser)', function(obj) {
 			var data = obj.data;
-			$("#txtclaid").text(data.roleid);
-			$("#txtadminuserrealname").text(data.rolename);
-			$("#txtadminuserusertype").text(data.authorityId);
+			$("#ckid").text(data.id);
+			$("#ckname").text(data.name);
+			$("#ckdescription").text(data.description);
 			
 			
 			switch (obj.event) {
 				case 'seluser':
 					layer.open({
 				        type: 1, 
-				        title: '管理员信息详情',
+				        title: '查看信息',
 				        area: ['600px', '430px'],
 				        shade: 0.8,
 				        content: $('#adminuserdetail'),
