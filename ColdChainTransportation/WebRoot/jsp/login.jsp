@@ -11,12 +11,10 @@
     <link rel="stylesheet" href="../css/amazeui.min.css" />
     <style>
         .logininfo{
-           height: 380px;
+            height: 380px;
             background-color: #fff;
             padding: 50px;
-           
-        }
-       
+        }     
         .btnlogin{
             background-color: #19A97B;
             color: #fff;

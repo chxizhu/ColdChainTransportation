@@ -1,0 +1,10 @@
+package controller.server;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@Controller
+@RequestMapping(value = "/LineArrange")
+public class LineArrangeController {
+
+}
