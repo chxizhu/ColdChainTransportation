@@ -118,7 +118,7 @@
 	     	   		<button id="btnselfrontinfo" type="button" class="layui-btn layui-bg-blue">查询</button>
 			    </div>	
 			    <div style = "margin-left:350px;margin-top:-52px;position: absolute;">
-				<button type="button" class="layui-btn layui-bg-blue" id="addartType" lay-event="addartType" lay-filter="addartType" style="margin-left: 10px;">新增线路</button>
+				<button class="layui-btn" onclick="x_admin_show('添加评分项','testMap.jsp')">新增路线</button> 
 				</div> 
 			</form>
 		</blockquote>
@@ -382,6 +382,31 @@
 			});
 		});
 		
+		
+		function x_admin_show(title,url,w,h){
+	    if (title == null || title == '') {
+	        title=false;
+	    };
+	    if (url == null || url == '') {
+	        url="404.html";
+	    };
+	    if (w == null || w == '') {
+	        w=($(window).width()*0.9);
+	    };
+	    if (h == null || h == '') {
+	        h=($(window).height() - 50);
+	    };
+	    layer.open({
+	        type: 2,
+	        area: [w+'px', h +'px'],
+	        fix: false, //不固定
+	        maxmin: true,
+	        shadeClose: true,
+	        shade:0.4,
+	        title: title,
+	        content: url
+	    });
+	}
 		
 	/* 动态加载用户角色 */
 	$(function() {

@@ -7,7 +7,6 @@ import business.basic.HibernateDAO;
 import business.basic.HibernateDAOimpl;
 import business.basic.JacksonUtil;
 import business.dao.AndroidLoginDAO;
-
 /*android studio π”√*/
 
 public class AndroidLoginDAOImpl implements AndroidLoginDAO {
@@ -17,10 +16,9 @@ private HibernateDAO bado = null;
  LoginAndroid login=new LoginAndroid();
 	
 	public AndroidLoginDAOImpl() {
-		this.bado = new HibernateDAOimpl();
-		
+		this.bado = new HibernateDAOimpl();	
 	}
-
+	
 	@Override
 	public boolean isUserLogin(String userid, String pwd) {
 		String hql = " from TUser where userid = ? and pwd = ?";		

@@ -33,7 +33,6 @@
 		<div class="left_open">
 			<!--<i title="展开左侧栏" class="iconfont">&#xe699;</i>-->
 			<i title="展开左侧栏" class="layui-icon layui-icon-shrink-right"></i>
-
 		</div>		
 		<!-- 新增结束 -->
 		<!-- '管理员'及 '前台首页'开始 -->
