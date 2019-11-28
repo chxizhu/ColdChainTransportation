@@ -38,5 +38,18 @@ private HibernateDAO bado = null;
 		  login.setSuccess(isUserLogin(userid,pwd));
 		  return JacksonUtil.beanToJson(login);
 	}
+	
+	@Override
+	public List getUserinfo(String userid) {
+		String sql="from TUserAndroid where userid=?";
+		 Object para[]= {userid};
+		 List list=bado.select(sql,para);
+		 return list;
+	}
+	
+	@Override
+	public String getUserinfoToJson(String userid){
+		return JacksonUtil.listToJson(getUserinfo(userid));
+	}
 
 }

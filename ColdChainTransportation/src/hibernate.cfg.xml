@@ -9,7 +9,9 @@
 		<property name="dialect">
 			org.hibernate.dialect.SybaseAnywhereDialect
 		</property>
-		<property name="connection.url">jdbc:sqlserver://localhost:1433;DatabaseName=FileManagementSystemDB</property>
+		<property name="connection.url">
+			jdbc:sqlserver://localhost:1433;DatabaseName=FileManagementSystemDB
+		</property>
 		<property name="connection.username">sa</property>
 		<property name="connection.password">123456</property>
 		<property name="connection.driver_class">
@@ -34,6 +36,7 @@
 		<mapping resource="model/TRealTimePosition.hbm.xml" />
 		<mapping resource="model/TTemperature.hbm.xml" />
 		<mapping resource="model/TUser.hbm.xml" />
+		<mapping resource="model/TUserAndroid.hbm.xml" />
 
 
 	</session-factory>

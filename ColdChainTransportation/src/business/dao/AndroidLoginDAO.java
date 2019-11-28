@@ -1,5 +1,7 @@
 package business.dao;
 
+import java.util.List;
+
 /*android studio使用*/
 
 public interface AndroidLoginDAO {
@@ -19,5 +21,21 @@ public interface AndroidLoginDAO {
 	  * @return
 	  */	
 	 public String loginInfo(String userid,String pwd);
+	 
+	 
+	 /**
+	  * 查询司机信息
+	  * @param userid
+	  * @return
+	  */	
+		public List getUserinfo(String userid);
+	 
+		 /**
+		  * 查询司机信息转换成JSON
+		  * @param userid
+		  * @return
+		  */	
+	 public String getUserinfoToJson(String userid);
+	 
 
 }

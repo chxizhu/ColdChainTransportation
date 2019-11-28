@@ -93,7 +93,7 @@
 		</primary-key>
 	</table>
 <table name="T_User" schema="dbo" catalog="ColdChainTransportationDB"
-	class="model.TUser">
+	class="model.TUserAndroid">
 	<primary-key>
 		<generator class="assigned"></generator>
 	</primary-key>
