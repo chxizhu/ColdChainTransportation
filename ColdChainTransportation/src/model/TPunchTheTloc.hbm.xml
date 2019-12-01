@@ -8,7 +8,7 @@
     <class name="model.TPunchTheTloc" table="T_PunchTheTloc" schema="dbo" catalog="ColdChainTransportationDB">
         <id name="pttid" type="java.lang.Integer">
             <column name="pttid" />
-            <generator class="assigned"></generator>
+            <generator class="identity"></generator>
         </id>
         <property name="sitename" type="java.lang.String">
             <column name="sitename" />

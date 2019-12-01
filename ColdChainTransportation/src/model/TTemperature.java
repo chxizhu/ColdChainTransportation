@@ -11,6 +11,7 @@ public class TTemperature implements java.io.Serializable {
 	private Integer tid;
 	private String realtimet;
 	private Integer sort;
+	private String nowtime;
 
 	// Constructors
 
@@ -19,9 +20,10 @@ public class TTemperature implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public TTemperature(String realtimet, Integer sort) {
+	public TTemperature(String realtimet, Integer sort, String nowtime) {
 		this.realtimet = realtimet;
 		this.sort = sort;
+		this.nowtime = nowtime;
 	}
 
 	// Property accessors
@@ -48,6 +50,14 @@ public class TTemperature implements java.io.Serializable {
 
 	public void setSort(Integer sort) {
 		this.sort = sort;
+	}
+
+	public String getNowtime() {
+		return this.nowtime;
+	}
+
+	public void setNowtime(String nowtime) {
+		this.nowtime = nowtime;
 	}
 
 }

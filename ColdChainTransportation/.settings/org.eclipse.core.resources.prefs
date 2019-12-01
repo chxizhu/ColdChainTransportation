@@ -1,2 +1,4 @@
 eclipse.preferences.version=1
+encoding//src/controller/server/BaseController.java=UTF-8
 encoding//src/controller/server/LoginController.java=UTF-8
+encoding//src/controller/server/OnenetAPIs.java=UTF-8
