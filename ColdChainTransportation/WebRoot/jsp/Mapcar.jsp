@@ -19,34 +19,51 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	</style>
 </head>
 <body>
+	<form class="layui-form" action="">
 	 <div class="layui-form-item">
 		 <div class="layui-inline">
-		   <label class="layui-form-label">站点名称:</label>
-		   <div class="layui-input-inline">
-		     <input type="text" id="name" name="phone" class="layui-input">
-		   </div>
+		   <label class="layui-form-label">所属线路:</label>
+		   <div class="layui-input-block">
+				       <select name="adminrole" id="adminrole" lay-filter="roleid">
+						 <option value="00">请选择线路</option>						
+						 </select>	
+				      </div>
 		 </div>
-	     <div class="layui-inline">
+		 <div class="layui-inline" style = "margin-left:px;position: absolute;">
+	       <label class="layui-form-label">站点名称:</label>
+	       <div class="layui-input-inline">
+	         <input type="text" id="name" name="name" class="layui-input">
+	       </div>
+	     </div>
+	     <div class="layui-inline"  style = "margin-left:250px;position: absolute;">
 	       <label class="layui-form-label">经度:</label>
 	       <div class="layui-input-inline">
 	         <input type="text" id="lng" name="phone" class="layui-input">
 	       </div>
 	     </div>
-	     <div class="layui-inline">
+	     <div class="layui-inline" style = "margin-left:500px;position: absolute;">
 	       <label class="layui-form-label">纬度:</label>
 	       <div class="layui-input-inline">
 	         <input type="text" id="lat" class="layui-input">
 	       </div>
 	     </div>
-		  <div class="layui-inline">
+		  <div class="layui-inline" style = "margin-left:800px;position: absolute;">
 		 <button type="button" id="btn" class="layui-btn">添加</button>
 		 </div>
 	   </div>
+	   </form>
 	   
 	<div id="allmap" style="width: 100%;height: 100%;"></div>
 </body>
 </html>
 <script type="text/javascript">
+
+	layui.use(['form'], function() {
+		var form = layui.form, 
+			$ = layui.jquery,
+			laydate = layui.laydate,
+              laytpl = layui.laytpl,
+			element = layui.element;
 	// 百度地图API功能
   
 	var map = new BMap.Map("allmap");   
@@ -71,8 +88,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	$("#btn").click(function(){
 						var lng=$("#lng").val().trim();
 						var lat=$("#lat").val().trim();
-						var name=$("#name").val().trim();
-						var data={lng:lng,lat:lat,name:name};
+						var name=$("#name").val();
+						var adminrole=$("#adminrole").val().trim();
+						var data={lng:lng,lat:lat,name:name,adminrole:adminrole};
 						
 				$.ajax({
 						type : 'post',
@@ -89,6 +107,31 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						error : function() {}
 					});				
 					 	
-						});					
-					
+						});		
+						/* 动态加载用户角色 */
+	$(function() {
+				$.ajax({
+					url : "../Line/xlselect",
+					type : "POST",
+					data : null,
+					dataType : 'json',
+					contentType : 'application/json;charset=UTF-8',//contentType 很重要
+					success : function(e) {
+						//alert(e.msg+"\n"+e.flag+"\n"+ JSON.stringify(e));
+						//alert(e.resultoObject[1]);
+						var s = $("#adminrole").html();		
+						var str = "";			
+						for(var i=0;i<e.data.length;i++){					
+							str += '<option value=' + e.data[i].lid + '>' + e.data[i].taskname + '</option>';
+						}
+						$("#adminrole").append(str);
+						form.render("select");
+					},
+					error : function(e) {
+						alert("error:"+e.msg);
+					}
+		
+				})
+			});		
+				});								
 </script>

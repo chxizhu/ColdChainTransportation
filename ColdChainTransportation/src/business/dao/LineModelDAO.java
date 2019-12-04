@@ -1,5 +1,7 @@
 package business.dao;
 import java.util.List;
+
+import model.TAdminRole;
 import model.TLine;
 
 public interface LineModelDAO {
@@ -31,4 +33,10 @@ public interface LineModelDAO {
 	 */
 	public List<TLine> selectByLike(String wherecondition,
 			int page, int limit);
+	
+	/**
+	 *角色选择
+	 *下拉查询;
+	 */
+	public List<TLine> seletLine();
 }

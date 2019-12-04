@@ -51,4 +51,10 @@ public class LineModelDAOImpl implements LineModelDAO {
 		return list;
 	}
 
+	@Override
+	public List<TLine> seletLine() {
+		String hql = "from TLine";
+		return bdao.select(hql);
+	}
+
 }

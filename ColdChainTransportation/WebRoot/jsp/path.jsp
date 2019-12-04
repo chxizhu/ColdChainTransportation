@@ -118,7 +118,7 @@
 	     	   		<button id="btnselfrontinfo" type="button" class="layui-btn layui-bg-blue">查询</button>
 			    </div>	
 			    <div style = "margin-left:350px;margin-top:-52px;position: absolute;">
-				<button class="layui-btn" onclick="x_admin_show('添加评分项','testMap.jsp')">新增路线</button> 
+				<button type="button" class="layui-btn layui-bg-blue" id="addartType" lay-event="addartType" lay-filter="addartType" style="margin-left: 10px;">添加线路</button>
 				</div> 
 			</form>
 		</blockquote>
@@ -135,59 +135,44 @@
 			<div class="artTypeLayer">
 				<form class="layui-form" action="">
 				 <div class="layui-form-item">   
-    <div class="layui-inline">
-      <label class="layui-form-label">角色：</label>
-      <div class="layui-input-block">
-				       	 <select name="adminrole" id="adminrole" lay-filter="roleid">
-						 <option value="00">请选择角色</option>						
-						 </select>	
-				      </div>
-    </div>
-    </div>
-					
     			   <div class="layui-form-item">
               <label for="phone" class="layui-form-label">
-              	 账号：
+              	 任务名称：
               </label>
               <div class="layui-input-inline">
-                  <input type="text" id="userid" name="userid" 
+                  <input type="text" id="taskname" name="taskname" 
                   autocomplete="off" class="layui-input">
               </div>             
           </div>
+            <div class="layui-form-item">
+    		<label class="layui-form-label">状态：</label>
+    <div class="layui-input-block">
+        <input type="checkbox" name="open" lay-skin="switch" lay-filter="switchTest" lay-text="false|true">
+    </div>
+  </div>
            <div class="layui-form-item">
               <label for="L_email" class="layui-form-label">
-                                                       姓名：
+                                                       起点：
               </label>
               <div class="layui-input-inline">
-                  <input type="text" id="username" name="username" 
+                  <input type="text" id="startpoint" name="startpoint" 
                   autocomplete="off" class="layui-input">
-              </div>              
-          </div>
- 			<div class="layui-form-item">
-              <label for="L_email" class="layui-form-label">
-                                                       性别：
-              </label>
-              <div class="layui-input-inline">
-                  <input type="radio" name="sex" value="男" title="男">
-      			  <input type="radio" name="sex" value="女" title="女">     
               </div>              
           </div>
           <div class="layui-form-item">
               <label for="phone" class="layui-form-label">
-                                               密码：
+                                               终点：
               </label>
               <div class="layui-input-inline">
-                  <input type="text" id="userpwd" name="userpwd" 
+                  <input type="text" id="endpoint" name="endpoint" 
                   autocomplete="off" class="layui-input">
               </div>             
           </div>  	
-          <div class="layui-form-item">
+           <div class="layui-form-item">
               <label for="phone" class="layui-form-label">
-                                               电话：
               </label>
               <div class="layui-input-inline">
-                  <input type="text" id="phone" name="phone" 
-                  autocomplete="off" class="layui-input">
+                  <input type="text" id="status" name="status" style="display:none;"  autocomplete="off" class="layui-input">
               </div>             
           </div>  
 				</form>
@@ -209,7 +194,7 @@
 		table.render({
 			elem : '#blogUser',
 			id:'blogUserid',
-			url : '../AdminUser/select',
+			url : '../Line/select',
 			title : '线路管理',
 			height: "full-160",
 			skin : 'line',
@@ -221,24 +206,24 @@
 					align : 'center',
 					width : 80
 				},{
-					field : 'userid',
+					field : 'lid',
 					title : '账号',
 					align : 'center'
 				}, {
-					field : 'username',
-					title : '姓名',
+					field : 'taskname',
+					title : '任务',
 					align : 'center'
 				}, {
-					field : 'sex',
+					field : 'status',
 					align : 'center',
-					title : '性别',
+					title : '状态',
 				}, {
-					field : 'phone',
+					field : 'startpoint',
 					align : 'center',
-					title : '电话'
+					title : '起点'
 				},{
-					title : '角色',
-					field : 'name',
+					title : '终点',
+					field : 'endpoint',
 					align : 'center',
 				},{
 					title : '操作',
@@ -313,10 +298,10 @@
 		
 		/* 添加一个网站用户 */
 		$("#addartType").click(function(){
-			$("#userid").val("");
-			$("#username").val("");
-			$("#userpwd").val("");
-			$("#phone").val("");
+			$("#taskname").val("");
+			$("#startpoint").val("");
+			$("#endpoint").val("");
+			$("#status").val("");
 			
 			layer.open({
 				type : 1,
@@ -326,33 +311,26 @@
 				content : $('#add-blogUser'),
 				btn : [ '保存', '返回' ],
 				yes : function() {
-					var userid = $("#userid").val().trim();
-					var username = $("#username").val().trim();
-					var userpwd = $("#userpwd").val().trim();
-					var phone = $("#phone").val().trim();
-					var sex = $('input:radio:checked').val();
-					var adminrole = $("#adminrole").val().trim();
-					
+					var taskname = $("#taskname").val().trim();
+					var startpoint = $("#startpoint").val().trim();
+					var endpoint = $("#endpoint").val().trim();
+					var status = $("#status").val().trim();					
 
-					if(userid == "") {
-						layer.tips('不能为空', '#userid');
+					if(taskname == "") {
+						layer.tips('不能为空', '#taskname');
 						return;
 					} 
-					if(username==""){
-						layer.tips('不能为空', '#username');
+					if(startpoint==""){
+						layer.tips('不能为空', '#startpoint');
 						return;
 					}
-					if(userpwd == "") {
-						layer.tips('不能为空', '#userpwd');
-						return;
-					} 
-					if(phone == "") {
-						layer.tips('不能为空', '#phone');
+					if(endpoint == "") {
+						layer.tips('不能为空', '#endpoint');
 						return;
 					} 
 					$.ajax({
 						type : 'get',
-						url : '../AdminUser/add?userid='+userid+'&username='+username+'&userpwd='+userpwd+'&adminrole='+adminrole+'&phone='+phone+'&sex='+sex,
+						url : '../Line/add?taskname='+taskname+'&startpoint='+startpoint+'&endpoint='+endpoint+'&status='+status,
 						datatype : 'json',
 						success : function(data) {
 							if (data.code == "0") {
@@ -407,6 +385,12 @@
 	        content: url
 	    });
 	}
+	
+	//监听指定开关
+  form.on('switch(switchTest)', function(data){
+    var msg = (this.checked ? 'true' : 'false');
+    $("#status").val(msg);
+  });
 		
 	/* 动态加载用户角色 */
 	$(function() {
@@ -468,7 +452,7 @@
 					}, function(){
 						$.ajax({
 			        		type: 'get',
-			        		url: "../AdminUser/delect?userid=" + data.userid,
+			        		url: "../Line/delect?lid=" + data.lid,
 			        		dataType: 'json',
 			        		success:function(data){
 			        			if(data.code == 0){

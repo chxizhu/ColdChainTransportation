@@ -30,14 +30,14 @@ public class PunchTheTlocController {
 	 *
 	 */
 	@RequestMapping(value = "/add")
-	public void addJudges(String name, String lng,String lat,
+	public void addJudges(String name, String lng,String lat,Integer adminrole,
 			HttpServletRequest request, HttpServletResponse response,
 			Model model) throws IOException {
 		
 		PunchTheTlocModelDAO adao = new PunchTheTlocModelDAOImpl();
 		
 		TPunchTheTloc ts = new TPunchTheTloc();
-		ts.setLid(1);
+		ts.setLid(adminrole);
 		ts.setSitename(name);
 		ts.setXcoordinate(lng);
 		ts.setYcoordinate(lat);	

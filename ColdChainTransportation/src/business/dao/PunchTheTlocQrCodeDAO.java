@@ -34,6 +34,6 @@ public interface PunchTheTlocQrCodeDAO {
 	 * @param
 	 * @return 成功返回0 失败返回1
 	 */
-	public boolean deletePunchTheTlocQrCode(String pttid);
+	public boolean deletePunchTheTlocQrCode(int pttid);
 
 }

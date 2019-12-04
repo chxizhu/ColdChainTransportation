@@ -50,7 +50,7 @@ private HibernateDAO bdao=null;
 	}
 
 	@Override
-	public boolean deletePunchTheTlocQrCode(String pttid) {
+	public boolean deletePunchTheTlocQrCode(int pttid) {
 		return bdao.delete(TPunchTheTloc.class, pttid);
 	}
 

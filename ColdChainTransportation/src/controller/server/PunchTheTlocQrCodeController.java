@@ -111,7 +111,7 @@ public class PunchTheTlocQrCodeController {
 	
 	
 	@RequestMapping(value = "/delect")
-	public void deletejudges(String pttid, HttpServletRequest request,
+	public void deletejudges(int pttid, HttpServletRequest request,
 			HttpServletResponse response, Model model) throws IOException {
 
 		PunchTheTlocQrCodeDAO pdao = new PunchTheTlocQrCodeDAOImpl();
