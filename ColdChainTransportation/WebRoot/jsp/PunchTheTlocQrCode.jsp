@@ -125,11 +125,16 @@
 			<a class="layui-btn layui-btn-xs" lay-event="seluser">查看二维码</a>
 			<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
 		</script>
+		
+		<div id="adminuserdetail" class="adminuserdetail">			
+		<div id="qrcode" style="width:300px; height:300px;margin-left:25px"></div>
+		</div>
 
 		
 	</div>
 	<script src="../js/jquery-3.3.1.js" charset="utf-8"></script>
 	<script src="../layui/layui.js" charset="utf-8"></script>
+	<script src="../js/qrcode.min.js" charset="utf-8"></script>
 	<script>
 	layui.use([ 'table', 'form', 'layer', 'laydate', 'laytpl', 'element' ], function() {
 		var table = layui.table, form = layui.form, 
@@ -242,36 +247,41 @@
 			});
 		});
 			
+			
+		//生成二维码的方法
+			  var qrcode = new QRCode(document.getElementById("qrcode"),{
+			   width : 300,
+			   height : 300
+			  });
+			  function makeCode (elText) {  
+			   qrcode.makeCode(elText);
+			  }
 		
-		
-	
 		//表格工具栏事件 
 		table.on('tool(blogUser)', function(obj) {
-			var data = obj.data;
-			$("#ckuserid").text(data.userid);
-			$("#ckusername").text(data.username);
-			$("#ckphone").text(data.phone);
-			$("#cksex").text(data.sex);
-			$("#ckname").text(data.name);
+			var data = obj.data;		
 			
 			switch (obj.event) {
-				case 'seluser':
-					layer.open({
-				        type: 1, 
-				        title: '管理员信息详情',
-				        area: ['600px', '430px'],
-				        shade: 0.8,
-				        content: $('#adminuserdetail'),
-				        btn: ['返回'], 
-				        yes: function(){
-				          layer.closeAll();
-				          $(".adminuserdetail").css("display","none");
-				        },
-				        cancel: function(){ 
-						  $(".adminuserdetail").css("display","none");
-						}
-				    });
-				break;
+				 //生成二维码按钮操作
+			    case 'seluser':
+					var eltext = data.pttid+"";
+			     makeCode(eltext);
+			     layer.open({
+			             type: 1, 
+			             title: '站点打卡二维码',
+			             area: ['400px', '440px'],
+			             shade: 0.8,
+			             content: $('#adminuserdetail'),
+			             btn: ['返回'], 
+			             yes: function(){
+			                layer.closeAll();
+			                $(".adminuserdetail").css("display","none");
+			             },
+			             cancel: function(){ 
+			         $(".adminuserdetail").css("display","none");
+			       }
+			         });
+			    break;
 				
 				//删除按钮操作
 				case 'del':
@@ -314,8 +324,10 @@
 				break;
 				
 			}
-			;
+			; 
 		});
+		
+		
 	
 	});
 
