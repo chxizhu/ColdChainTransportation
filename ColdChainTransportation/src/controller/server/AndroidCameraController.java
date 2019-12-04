@@ -42,6 +42,7 @@ public class AndroidCameraController {
 			  response.setContentType("application/json");
 			  LayuiData laydata = new LayuiData();
 			  boolean result = GenerateImage(data);
+			  System.out.println(result);
 			  if (result) {
 			   laydata.code = LayuiData.SUCCESS;
 			   laydata.msg = "图片转换成功";
@@ -102,8 +103,8 @@ public class AndroidCameraController {
 		   // 生成jpeg图片
 		   String imagePath = "e:";
 		   // System.currentTimeMillis()
-/*		   String imgFilePath = "E:\\GITSERVER\\ColdChainTransportationGIT\\ColdChainTransportation\\ColdChainTransportation\\WebRoot\\AndroidImages\\"	*/	
-		   String imgFilePath = "../AndroidImages\\"
+		   String imgFilePath = "E:\\GITSERVER\\ColdChainTransportationGIT\\ColdChainTransportation\\ColdChainTransportation\\WebRoot\\AndroidImages\\"	
+		   /*String imgFilePath = "../AndroidImages\\"*/
 				   
 		     + df.format(new Date()) + ".jpg";// 新生成的图片
 		   OutputStream out = new FileOutputStream(imgFilePath);
