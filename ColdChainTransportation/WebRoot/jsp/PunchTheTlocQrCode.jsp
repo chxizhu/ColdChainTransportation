@@ -264,8 +264,8 @@
 			switch (obj.event) {
 				 //生成二维码按钮操作
 			    case 'seluser':
-					var eltext = data.pttid+"";
-			     makeCode(eltext);
+					var eltext = data.xcoordinate + "  " + data.ycoordinate+"";
+			      makeCode(eltext)
 			     layer.open({
 			             type: 1, 
 			             title: '站点打卡二维码',
